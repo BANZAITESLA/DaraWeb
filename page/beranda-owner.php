@@ -1,8 +1,9 @@
 <?php
-    include_once("menu-owner.php");
-    include_once("functions.php");
+include_once("menu-owner.php");
+include_once("../component/functions.php");
 ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +11,10 @@
     <title>Beranda</title>
     <link href="assets/css/style.css?v=1.0" rel="stylesheet">
 </head>
+
 <body>
     <?php
-        menu_owner();
+    menu_owner();
     ?>
     <div class="container-info">
         <div class="head-info">
@@ -30,4 +32,5 @@
         </div>
     </div>
 </body>
+
 </html>

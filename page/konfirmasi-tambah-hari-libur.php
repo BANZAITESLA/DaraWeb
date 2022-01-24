@@ -1,9 +1,5 @@
 <?php
-//ntar bkin file function php nya pure file php doang jan dicampur html biar bisa dipanggil ke berbagai macam wkwkwk
-function dbConnect() { /* function untuk koneksi ke db */
-    $db = new mysqli("localhost","root","","daraweb"); 
-    return $db; 
-}
+include_once('component/functions.php');
 $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_errno == 0) {
@@ -20,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $res3 = $db->query($cek_id);
 
             if ($res3) {
-                if($res3 -> num_rows == 1) {
+                if ($res3->num_rows == 1) {
                     $arr = array();
                     $arr['status'] = "error";
                     $arr['message'] = "Duplikat";
@@ -39,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo $response;
                 }
             }
-            
+
             //ini return response tadi
         } catch (\Throwable $th) {
             //ini mengembalikan semua kemungkinan error

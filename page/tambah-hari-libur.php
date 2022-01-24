@@ -75,15 +75,15 @@ include_once("functions.php");
         $('#formData').on('submit', function(e) {
             if ($('#ket').val() === "") {
                 Swal.fire({
-                        icon : 'error',
-                        title : 'Kesalahan',
-                        text : 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
-                        confirmButtonText: 'Ok',
-                        iconColor : '#b31200',
-                        width : '35%',
-                        color : '#000000',
-                        confirmButtonColor : '#1e3d59',
-                    })
+                    icon: 'error',
+                    title: 'Kesalahan',
+                    text: 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
+                    confirmButtonText: 'Ok',
+                    iconColor: '#b31200',
+                    width: '35%',
+                    color: '#000000',
+                    confirmButtonColor: '#1e3d59',
+                })
             }
             let url = document.location.origin + "/daraweb/konfirmasi-tambah-hari-libur.php";
             $.ajax({
@@ -98,26 +98,14 @@ include_once("functions.php");
                 //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
                 dataType: 'json',
                 success: function(response) {
-                    Swal.fire({
-                        icon : 'success',
-                        title : 'Berhasil',
-                        text : 'Data berhasil disimpan',
-                        confirmButtonText: 'Ok',
-                        width : '35%',
-                        color : '#000000',
-                    })
+                    if (response.status == 'error') {
+                        errorMessage(response.message);
+                    } else {
+                        succesMessage(response.message);
+                    }
                 },
                 error: function(response) {
-                    Swal.fire({
-                        icon : 'error',
-                        title : 'Kesalahan',
-                        text : 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
-                        confirmButtonText: 'Ok',
-                        iconColor : '#b31200',
-                        width : '35%',
-                        color : '#000000',
-                        confirmButtonColor : '#1e3d59',
-                    })
+                    errorMessage(response.message);
                 }
             });
             //ini maksudna yg dibawah biar fungsi pas mencet simpan gk lngung pke fungsi bawaan ke action di formnya tp di batalin jadi di handle sm ajax
