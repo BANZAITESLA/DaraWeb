@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <?php include_once('header.php') ?>
+    <?php include_once('component/headerLogin.php') ?>
     <title>Login</title>
+    <?php include_once('component/script.php') ?>
 </head>
 
 <body>
-    <?php include_once('function.php') ?>
+    <?php include_once('component/functions.php') ?>
 
-    <?php include_once('script.php') ?>
 </body>
 
 </html>

@@ -1,13 +1,15 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <?php include_once('component/header.php') ?>
-    <title>Login</title>
+    
+    <head>
+        <?php include_once('component/headerLogin.php'); ?>
+        <title>Login DaraWeb</title>
+        <?php include_once('component/script.php'); ?>
 </head>
 
 <body>
-    <?php include_once('component/functions.php') ?>
+    <?php include_once('component/functions.php'); ?>
     <?php
     $db = dbConnect();
     if (isset($_POST["Masuk"])) {
@@ -35,7 +37,7 @@
                             }
                             redirect($url);
                         } else {
-                            echo '<script type="text/javascript">', 'passwordsalah();', '</script>';
+                            echo '<script type="text/javascript">', 'errorMessage("Password salah / tidak sesuai");', '</script>';
                         }
                     }
                 } else {
@@ -73,7 +75,7 @@
         </form>
     </div>
 
-    <?php include_once('component/script.php') ?>
+    <script src="assets/js/login.js"></script>
 </body>
 
 </html>

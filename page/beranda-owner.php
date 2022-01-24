@@ -1,21 +1,16 @@
-<?php
-include_once("menu-owner.php");
-include_once("../component/functions.php");
-?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda</title>
-    <link href="assets/css/style.css?v=1.0" rel="stylesheet">
+    <?php include_once('../component/header.php') ?>
+    <title>Login</title>
+    <?php include_once('../component/script.php') ?>
 </head>
 
 <body>
-    <?php
-    menu_owner();
-    ?>
+    <?php include_once('../component/functions.php') ?>
+    <?php include_once("../page/menu-owner.php"); ?>
+    <?php menu_owner(); ?>
     <div class="container-info">
         <div class="head-info">
             Beranda
