@@ -4,7 +4,12 @@
 <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js" integrity="sha512-YuZemcyQ8r4w8tdxIzkJVgWfHrzSQN9PuF18I490DE8H97DOkrt+bolBf3/mve+9t8SLWODBzFCCPxH/vZYqBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $(function() {
+        $('#formData').areYouSure();
+    });
+
     function successMessage(message) {
         Swal.fire({
             icon: 'success',
@@ -83,5 +88,6 @@
                 window.location = url;
             }
         })
-    }
-</script>
+    } 
+    
+<script/>
