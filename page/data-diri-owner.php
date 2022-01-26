@@ -3,11 +3,11 @@
 
 <head>
     <?php include_once('../component/header.php') ?>
-    <title>Login</title>
+    <title>Data Diri</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
-<body onbeforeunload="return alertMessage()">
+<body>
     <?php include_once('../component/functions.php') ?>
     <?php include_once("../page/menu-owner.php"); ?>
     <?php
@@ -76,11 +76,6 @@
             </form>
         </div>
     </div>
-    <script>
-        function alertMessage() {
-            errorMessage("Tidak dapat terhubung ke Database. Hubungi Administrator.");
-        }
-    </script>
 </body>
 
 </html>
