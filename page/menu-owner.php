@@ -14,7 +14,7 @@ function menu_owner()
                 <a href="data-diri-owner.php" accesskey="d"><i class="fas fa-address-card"></i>Data Diri</a>
                 <hr>
                 <a href="atur-jabatan.php" accesskey="j"><i class="fas fa-cog"></i>Pengaturan Jabatan</a>
-                <a href="#" accesskey="b"><i class="fas fa-cog"></i>Pengaturan Status</a>
+                <a href="atur-status.php" accesskey="s"><i class="fas fa-cog"></i>Pengaturan Status</a>
                 <a href="#" accesskey="b"><i class="fas fa-user-check"></i>Data Pegawai Aktif</a>
                 <a href="#" accesskey="b"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
                 <hr>
