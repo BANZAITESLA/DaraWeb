@@ -11,19 +11,39 @@
     <?php include_once('../component/functions.php') ?>
     <?php include_once("../page/menu-owner.php"); ?>
     <?php menu_owner(); ?>
-    <div class="container-info">
-        <div class="head-info">
-            Beranda
-            <div class="ts">timestamp</div>
-        </div>
-        <div class="beranda-info">
-            <div class="info-rec"></div>
-            <div class="info-rec"></div>
-            <div class="info-rec"></div>
-            <div class="info-grid"></div>
-            <div class="info-grid"></div>
-            <div class="info-grid"></div>
-            <div class="info-grid"></div>
+    <div class="container-all">
+        <div class="head-info">Data Diri</div>
+        <div class="container-form">
+            <div class="beranda-box-1">
+                <div class="box1">
+                    <div class="box-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+                <div class="box1">
+                    <div class="box-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+                <div class="box1">
+                    <div class="box-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+            </div>
+            <div class="beranda-box-2">
+                <div class="wrapper-1">
+                    <div class="box2"></div>
+                    <div class="box2"></div>
+                </div>
+                <div class="wrapper-2">
+                    <div class="box2"></div>
+                    <div class="box2"></div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

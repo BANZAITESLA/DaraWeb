@@ -455,3 +455,60 @@ hr {
 .cancel:hover {
     background-color: #920f00;
 }
+
+.beranda-box-1, .beranda-box-2 {
+    position: relative;
+}
+
+.beranda-box-1 .box1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: red;
+}
+
+.beranda-box-1 .box1 .box-icon {
+    margin: none;
+    padding: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 80px;
+    width: 100px;
+    background-color: black;
+}
+
+.beranda-box-1 .box1 .box-icon i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.beranda-box-2 .wrapper-1{
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    background-color: blue;
+    margin-bottom: 10px;
+}
+
+.beranda-box-2 .wrapper-1 .box2{
+    height: 30px;
+    background-color: cyan;
+    width: 49.5%;
+}
+
+.beranda-box-2 .wrapper-2{
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+}
+
+.beranda-box-2 .wrapper-2 .box2{
+    height: 30px;
+    background-color: cyan;
+    width: 49.5%;
+}
