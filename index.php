@@ -11,43 +11,43 @@
 <body>
     <?php include_once('component/functions.php'); ?>
     <?php
-    $db = dbConnect();
-    if (isset($_POST["Masuk"])) {
-        if ($db->connect_errno == 0) {
-            $username = $db->escape_string($_POST["username"]);
-            $password = $db->escape_string($_POST["password"]);
+        $db = dbConnect();
+        if (isset($_POST["Masuk"])) {
+            if ($db->connect_errno == 0) {
+                $username = $db->escape_string($_POST["username"]);
+                $password = $db->escape_string($_POST["password"]);
 
-            $cek_user = "SELECT id_pegawai FROM `pegawai` WHERE id_pegawai = '$username'";
-            $res1 = $db->query($cek_user);
+                $cek_user = "SELECT id_pegawai FROM `pegawai` WHERE id_pegawai = '$username'";
+                $res1 = $db->query($cek_user);
 
-            if ($res1) {
-                if ($res1->num_rows == 1) {
-                    $cek_pass = "SELECT id_pegawai, nama FROM `pegawai` WHERE id_pegawai = '$username' and `password` = md5('$password')";
-                    $res2 = $db->query($cek_pass);
-                    if ($res2) {
-                        if ($res2->num_rows == 1) {
-                            $data = $res2->fetch_assoc();
-                            $_SESSION['id_pegawai'] = $data['id_pegawai'];
-                            $_SESSION['nama'] = $data['nama'];
+                if ($res1) {
+                    if ($res1->num_rows == 1) {
+                        $cek_pass = "SELECT id_pegawai, nama FROM `pegawai` WHERE id_pegawai = '$username' and `password` = md5('$password')";
+                        $res2 = $db->query($cek_pass);
+                        if ($res2) {
+                            if ($res2->num_rows == 1) {
+                                $data = $res2->fetch_assoc();
+                                $_SESSION['id_pegawai'] = $data['id_pegawai'];
+                                $_SESSION['nama'] = $data['nama'];
 
-                            if ($username = '12345678') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                $url = "/daraweb/page/beranda-owner.php";
+                                if ($username = '12345678') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                    $url = "/daraweb/page/beranda-owner.php";
+                                } else {
+                                    $url = "/daraweb/page/beranda-pegawai.php";
+                                }
+                                redirect($url);
                             } else {
-                                $url = "/daraweb/page/beranda-pegawai.php";
+                                echo '<script type="text/javascript">', 'errorMessage("Password salah / tidak sesuai");', '</script>';
                             }
-                            redirect($url);
-                        } else {
-                            echo '<script type="text/javascript">', 'errorMessage("Password salah / tidak sesuai");', '</script>';
                         }
+                    } else {
+                        echo '<script type="text/javascript">', 'errorMessage("ID Pegawai salah / tidak terdaftar");', '</script>';
                     }
-                } else {
-                    echo '<script type="text/javascript">', 'usersalah();', '</script>';
                 }
+            } else {
+                echo '<script type="text/javascript">', 'errorMessage("Tidak dapat terhubung ke Database. Hubungi Administrator.");', '</script>';
             }
-        } else {
-            echo '<script type="text/javascript">', 'dberror();', '</script>';
         }
-    }
     ?>
     <div class="header">DaraWeb.</div>
     <div class="box-login">
@@ -68,7 +68,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <small></small> <!-- err msg  -->
             </div>
-            <a href="lupa-password.php">Lupa Password?</a>
+            <a href="./page/lupa-password.php">Lupa Password?</a>
             <div class="form-submit">
                 <input type="submit" name="Masuk" value="Masuk" />
             </div>

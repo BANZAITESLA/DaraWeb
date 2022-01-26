@@ -247,7 +247,21 @@ hr {
 
 .data-control input:focus {
 	outline: 0;
-	border-color: #1e3d59;
+	border-color: #ff7b00;
+}
+
+.data-control select {
+	border: 1.5px solid #1e3d59;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 5px;
+    width: 60%;
+}
+
+.data-control select:focus {
+	outline: 0;
+	border-color: #ff7b00;
 }
 
 .data-submit {

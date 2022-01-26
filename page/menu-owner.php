@@ -9,9 +9,9 @@ function menu_owner()
                 <div style="font-size: 16px; font-weight:400; color:whitesmoke">Selamat Datang, <?php echo explode(' ', trim($_SESSION["nama"]))[0]; ?>!</div>
             </div>
             <div class="menu">
-                <a href="#" accesskey="b"><i class="fas fa-home"></i>Beranda</a>
+                <a href="beranda-owner.php" accesskey="b"><i class="fas fa-home"></i>Beranda</a>
                 <hr>
-                <a href="#" accesskey="d"><i class="fas fa-address-card"></i>Data Diri</a>
+                <a href="data-diri-owner.php" accesskey="d"><i class="fas fa-address-card"></i>Data Diri</a>
                 <hr>
                 <a href="#" accesskey="b"><i class="fas fa-cog"></i>Pengaturan Jabatan</a>
                 <a href="#" accesskey="b"><i class="fas fa-cog"></i>Pengaturan Status</a>
@@ -28,27 +28,11 @@ function menu_owner()
         </div>
 <?php
     } else {
-        echo '<script type="text/javascript">', 'logindulu();', '</script>';
+        echo '<script type="text/javascript">', 'redirectMessage("Tidak dapat mengakses Sistem. Silahkan Login terlebih dahulu.", "../index.php");', '</script>';
     }
 } ?>
 <script>
     $(document).on('click', '#logout', function() {
-        Swal.fire({
-            icon: 'question',
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin keluar dari Sistem?',
-            confirmButtonText: 'Ya',
-            showCancelButton: true,
-            cancelButtonText: 'Batal',
-            iconColor: '#1e3d59',
-            width: '35%',
-            color: '#000000',
-            confirmButtonColor: '#09791c',
-            cancelButtonColor: '#b31200',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = "logout.php";
-            }
-        })
+        askRedirectMessage("Apakah Anda yakin ingin keluar dari Sistem?", "logout.php");
     })
 </script>

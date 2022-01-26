@@ -1,18 +1,14 @@
-<?php
-    session_start(); /* session login dimulai */
-    include_once("functions.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include_once('../component/header.php') ?>
     <title>Reset Password</title>
-    <link href="assets/css/style.css?" rel="stylesheet">
+    <?php include_once('../component/script.php') ?>
 </head>
+
 <body>
+    <?php include_once('../component/functions.php') ?>
     <?php
         $db = dbConnect();
         if(isset($_POST["Masuk"])) {
@@ -29,14 +25,14 @@
                         $res_pass = "UPDATE pegawai SET `password` = md5('$password1') WHERE id_pegawai = '$username';";
                         $res2 = $db->query($res_pass);
                         if ($res2) {
-                            echo '<script type="text/javascript">','resetpassword();','</script>';
+                            echo '<script type="text/javascript">','successRedirectMessage("Password berhasil diubah. Silahkan Login kembali.", "../index.php");','</script>';
                         }
                     } else {
-                        echo '<script type="text/javascript">','usersalah();','</script>';
+                        echo '<script type="text/javascript">','errorMessage("ID Pegawai salah / tidak terdaftar");','</script>';
                     } 
                 }
             } else {
-                echo '<script type="text/javascript">','dberror();','</script>';
+                echo '<script type="text/javascript">','errorMessage("Tidak dapat terhubung ke Database. Hubungi Administrator.");','</script>';
             }
         }
     ?>
@@ -69,6 +65,7 @@
             </div>
         </form>
     </div>
-    <script src="assets/js/reset-pw.js"></script>
+    <script src="../assets/js/reset-pw.js"></script>
 </body>
+
 </html>

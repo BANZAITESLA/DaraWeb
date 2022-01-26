@@ -5,95 +5,16 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-    function usersalah() {
-        /* alert untuk username salah */
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'ID Pegawai salah / tidak terdaftar',
-            confirmButtonText: 'Ok',
-            iconColor: '#b31200',
-            width: '35%',
-            color: '#000000',
-            confirmButtonColor: '#1e3d59',
-        })
-    }
-
-    function passwordsalah() {
-        /* alert untuk password salah */
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'Password salah / tidak sesuai',
-            confirmButtonText: 'Ok',
-            iconColor: '#b31200',
-            width: '35%',
-            color: '#000000',
-            confirmButtonColor: '#1e3d59',
-        })
-    }
-
-    function dberror() {
-        /* alert untuk db not connected */
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'Tidak dapat terhubung ke Database. Hubungi Administrator.',
-            confirmButtonText: 'Ok',
-            iconColor: '#b31200',
-            width: '35%',
-            color: '#000000',
-            confirmButtonColor: '#1e3d59',
-        })
-    }
-
-    function logindulu() {
-        /* alert untuk no session */
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'Tidak dapat mengakses Sistem. Silahkan Login terlebih dahulu.',
-            confirmButtonText: 'Ok',
-            iconColor: '#b31200',
-            width: '35%',
-            color: '#000000',
-            confirmButtonColor: '#1e3d59',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = "../index.php";
-            }
-        })
-
-    }
-
-    // * alert berhasil
-    function resetpassword() {
-        /* alert untuk reset password */
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil',
-            text: 'Password berhasil diubah. Silahkan Login kembali.',
-            confirmButtonText: 'Ok',
-            width: '35%',
-            color: '#000000',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = "login.php";
-            }
-        })
-
-    }
-
-    function succesMessage(message) {
+    function successMessage(message) {
         Swal.fire({
             icon: 'success',
             title: 'Berhasil',
             text: message,
             confirmButtonText: 'Ok',
+            iconColor: '#09791c',
             width: '35%',
             color: '#000000',
+            confirmButtonColor: '#1e3d59',
         })
     }
 
@@ -107,6 +28,60 @@
             width: '35%',
             color: '#000000',
             confirmButtonColor: '#1e3d59',
+        })
+    }
+
+    function redirectMessage(message, url) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Kesalahan',
+            text: message,
+            confirmButtonText: 'Ok',
+            iconColor: '#b31200',
+            width: '35%',
+            color: '#000000',
+            confirmButtonColor: '#1e3d59',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = url;
+            }
+        })
+    }
+
+    function askRedirectMessage(message, url) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Konfirmasi',
+            text: message,
+            confirmButtonText: 'Ya',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            iconColor: '#1e3d59',
+            width: '35%',
+            color: '#000000',
+            confirmButtonColor: '#09791c',
+            cancelButtonColor: '#b31200',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = url;
+            }
+        })
+    }
+
+    function successRedirectMessage(message, url) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: message,
+            confirmButtonText: 'Ok',
+            iconColor: '#09791c',
+            width: '35%',
+            color: '#000000',
+            confirmButtonColor: '#1e3d59',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = url;
+            }
         })
     }
 </script>
