@@ -5,7 +5,7 @@ $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_errno == 0) {
         try {
-            $nama = $_POST["nama"];
+            $nama = $db->escape_string($_POST["nama"]);
 
             $sql = "INSERT INTO `status_pegawai` (`nama_status_p`) VALUES ('$nama');";
             $res = $db->query($sql);

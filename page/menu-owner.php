@@ -15,7 +15,7 @@ function menu_owner()
                 <hr>
                 <a href="atur-jabatan.php" accesskey="j"><i class="fas fa-cog"></i>Pengaturan Jabatan</a>
                 <a href="atur-status.php" accesskey="s"><i class="fas fa-cog"></i>Pengaturan Status</a>
-                <a href="#" accesskey="b"><i class="fas fa-user-check"></i>Data Pegawai Aktif</a>
+                <a href="pegawai-aktif.php" accesskey="a"><i class="fas fa-user-check"></i>Data Pegawai Aktif</a>
                 <a href="#" accesskey="b"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
                 <hr>
                 <a href="atur-absensi.php" accesskey="a"><i class="fas fa-cog"></i>Pengaturan Absensi</a>

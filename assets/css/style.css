@@ -14,7 +14,7 @@ body {
     width: 100vw;
 }
 
-i {
+.menu i {
     width: 40px;
 }
 
@@ -245,7 +245,22 @@ hr {
     width: 60%;
 }
 
+.data-control textarea {
+	border: 1.5px solid #1e3d59;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 5px;
+    width: 60%;
+    resize: none;
+}
+
 .data-control input:focus {
+	outline: 0;
+	border-color: #6A6363;
+}
+
+.data-control textarea:focus {
 	outline: 0;
 	border-color: #6A6363;
 }
@@ -516,7 +531,7 @@ td {
 }
 td button {
     padding: 3px;
-    width: 50px;
+    width: 30px;
 
     background-color: #6A6363;
     border-radius: 10px;
@@ -528,6 +543,11 @@ td button {
     font-family: inherit;
     font-size: 12px;
     cursor: pointer;
+    text-align: center;
+}
+
+td button i {
+    text-align: center;
 }
 
 td button:hover {

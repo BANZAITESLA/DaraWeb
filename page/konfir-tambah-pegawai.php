@@ -5,16 +5,23 @@ $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_errno == 0) {
         try {
+            $id = $db->escape_string($_POST["id"]);
             $nama = $db->escape_string($_POST["nama"]);
-            $jenis = $db->escape_string($_POST["jenis"]);
+            $jk = $db->escape_string($_POST["jk"]);
+            $email = $db->escape_string($_POST["email"]);
+            $nohp = $db->escape_string($_POST["nohp"]);
+            $alamat = $db->escape_string($_POST["alamat"]);
+            $status = $db->escape_string($_POST["status"]);
+            $jabatan = $db->escape_string($_POST["jabatan"]);
+            $pass = $db->escape_string($_POST["pass"]);
 
-            $sql = "INSERT INTO `jabatan` (`nama_jabatan`, `jenis_jabatan`) VALUES ('$nama', '$jenis');";
+            $sql = "INSERT INTO pegawai (id_pegawai, nama, jenis_kelamin, no_hp, alamat, tgl_diterima, `password`, id_status_p, id_jabatan, email) VALUES ('', '', '', '', '', '', '', '', '', '',);";
             $res = $db->query($sql);
 
             if ($res) {
                 $arr = array();
                 $arr['status'] = "success";
-                $arr['message'] = "Data berhasil disimpan";
+                $arr['message'] = "Berhasil Disimpan";
                 $response = json_encode($arr);
                 echo $response;
             }

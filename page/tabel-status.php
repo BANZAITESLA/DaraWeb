@@ -31,8 +31,8 @@
                                 <td align="center"></td>
                                 <td><?php echo $barisdata["nama_status_p"]; ?></td>
                                 <td align="center">
-                                    <a href="edit-status.php?id_status=<?php echo $barisdata["id_status_p"]; ?>"><button>Edit</button></a>
-                                    <button class="tombolHapus" value="<?php echo $barisdata["id_status_p"]; ?>">Hapus</button></a>
+                                    <a href="edit-status.php?id_status=<?php echo $barisdata["id_status_p"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
+                                    <button class="tombolHapus" value="<?php echo $barisdata["id_status_p"]; ?>" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                 <?php

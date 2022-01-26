@@ -5,8 +5,8 @@ $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_errno == 0) {
         try {
-            $id = $_POST["id"];
-            $nama = $_POST["nama"];
+            $id = $db->escape_string($_POST["id"]);
+            $nama = $db->escape_string($_POST["nama"]);
 
             $sql = "UPDATE status_pegawai SET nama_status_p = '$nama' WHERE id_status_p = '$id';";
             $res = $db->query($sql);

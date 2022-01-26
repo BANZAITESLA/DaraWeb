@@ -33,8 +33,8 @@
                                 <td><?php echo $barisdata["nama_jabatan"]; ?></td>
                                 <td><?php echo $barisdata["jenis_jabatan"]; ?></td>
                                 <td align="center">
-                                    <a href="edit-jabatan.php?id_jabatan=<?php echo $barisdata["id_jabatan"]; ?>"><button>Edit</button></a>
-                                    <button class="tombolHapus" value="<?php echo $barisdata["id_jabatan"]; ?>">Hapus</button></a>
+                                    <a href="edit-jabatan.php?id_jabatan=<?php echo $barisdata["id_jabatan"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
+                                    <button class="tombolHapus" value="<?php echo $barisdata["id_jabatan"]; ?>" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                 <?php

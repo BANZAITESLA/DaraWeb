@@ -7,9 +7,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $id = $db->escape_string($_POST["id"]);
             $nama = $db->escape_string($_POST["nama"]);
-            $jenis = $db->escape_string($_POST["jenis"]);
+            $jk = $db->escape_string($_POST["jk"]);
+            $email = $db->escape_string($_POST["email"]);
+            $nohp = $db->escape_string($_POST["nohp"]);
+            $alamat = $db->escape_string($_POST["alamat"]);
+            $status = $db->escape_string($_POST["status"]);
+            $jabatan = $db->escape_string($_POST["jabatan"]);
+            $pass = $db->escape_string($_POST["pass"]);
 
-            $sql = "UPDATE jabatan SET nama_jabatan = '$nama', jenis_jabatan = '$jenis' WHERE id_jabatan = '$id';";
+            if ($pass == '') {
+                $sql = "UPDATE pegawai SET nama = '$nama', jenis_kelamin = '$jk', email = '$email', no_hp = '$nohp', alamat = '$alamat', id_status_p = '$status', id_jabatan = '$jabatan' WHERE id_pegawai = '$id';";
+            } else {
+                $sql = "UPDATE pegawai SET nama = '$nama', jenis_kelamin = '$jk', email = '$email', no_hp = '$nohp', alamat = '$alamat', id_status_p = '$status', id_jabatan = '$jabatan', password = md5('$pass') WHERE id_pegawai = '$id';";
+            }
+
             $res = $db->query($sql);
 
             if ($res) {
