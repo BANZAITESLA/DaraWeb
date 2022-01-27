@@ -231,6 +231,27 @@ hr {
     padding: 5px 30px;
 }
 
+.data-control-smol {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.data-control-smol label {
+    font-size: 14px;
+    font-weight: 500;
+    width: 60px;
+}
+
+.data-control-smol input {
+	border: 1.5px solid #1e3d59;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 14px;
+    width: 30%;
+}
+
 .data-control label {
     font-size: 16px;
     font-weight: 500;
@@ -347,6 +368,10 @@ hr {
     border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 }
 
 .head-item {
@@ -529,6 +554,24 @@ hr {
     background-color: #14441d;
 }
 
+.save-smol input {
+    background-color: #09791c;
+	border: 0px solid #09791c;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	color: #f5f5f5;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 5px;
+    margin-right: 30px;
+    width: 80px;
+    cursor: pointer;
+}
+
+.save-smol input:hover {
+    background-color: #14441d;
+}
+
 .stop input {
     background-color: #09791c;
 	border: 0px solid #09791c;
@@ -547,7 +590,7 @@ hr {
     background-color: #14441d;
 }
 
-.cancel  {
+.cancel {
     background-color: #b31200;
 	border: 0px solid #b31200;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -562,6 +605,23 @@ hr {
     color: #f5f5f5;
 	font-family: inherit;
 	font-size: 16px;
+}
+
+.cancel-smol input {
+    background-color: #b31200;
+	border: 0px solid #b31200;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	color: #f5f5f5;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 5px;
+    width: 80px;
+    cursor: pointer;
+}
+
+.cancel-smol input:hover {
+    background-color: #920f00;
 }
 
 .cancel:hover {
@@ -631,7 +691,7 @@ hr {
 }
 
 .table-z {
-    margin: 20px 0 0 0;
+    margin: 0;
 }
 
 .table-f {
