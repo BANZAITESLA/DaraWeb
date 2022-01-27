@@ -1,50 +1,94 @@
-<?php
-    include_once("menu-owner.php");
-    include_once("functions.php");
-?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login DaraWeb</title>
-    <link href="assets/css/style.css?" rel="stylesheet">
+    <?php include_once("../page/menu-owner.php"); ?>
+    <?php include_once('../component/header.php'); ?>
+    <title>Pengaturan Absensi</title>
+    <?php include_once('../component/script.php'); ?>
 </head>
+
 <body>
-    <?php
-        menu_owner();
-    ?>
+    <?php include_once('../component/functions.php'); ?>
+    <?php menu_owner(); ?>
     <div class="container-all">
         <div class="head-info">Pengaturan Absensi</div>
         <div class="container-absen">
             <div class="box-item">
                 <div style="font-size: 16px; font-weight:500;">Atur Hari Libur</div>
                 <div class="head-box-item">
-                    <div class="item-control">
-                        <input type="text" placeholder="Cari Tanggal" id="cari"/>
-                        <i class='fas fa-search'></i>
-                    </div>
                     <div class="item-control-mp">
                         <label for="bulan"> Bulan</label>
                         <input type="month" id="start" name="start" min="2022-01"/>
                     </div>
-                    <div class="item-button">
+                    <div class="item-button-z">
                         <a href="tambah-hari-libur.php">Tambah</a>
                     </div>
                 </div>
-                <div class="table" id="table"></div> <!-- tempat table -->
+                <div class="table-z" id="table"></div> <!-- tempat table -->
             </div>
-            <div class="box-item"></div>
+            <div class="box-item">
+                <div style="font-size: 16px; font-weight:500;">Atur Lokasi Toko</div>
+                <div id='map' style='width: 100%; height: 60%; margin-top: 10px;'></div>
+                <div class="item-button-c">
+                    <button class="btn-lokasi">Atur Lokasi</button>
+                </div>
+            </div>
             <div class="box-item"></div>
         </div>
     </div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
     <script>
+        navigator.geolocation.getCurrentPosition(function(position) { /* get lokasi user */
+            let lat = position.coords.latitude; 
+            let long = position.coords.longitude; 
+
+            console.log(lat);
+            console.log(long);
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZGVhMTAiLCJhIjoiY2tzOWFwdnlxMHNyaTMxcGU5NnBnaWhtNCJ9.m9atsKQbdp-Vg5a5DMPlMw';
+            var map = new mapboxgl.Map({
+            container: 'map',
+            center: [long, lat], 
+            zoom: 15,
+            style: 'mapbox://styles/mapbox/streets-v11'
+            });
+
+            const marker1 = new mapboxgl.Marker()
+                .setLngLat([long, lat])
+                .addTo(map);
+            
+            $('.btn-lokasi').on('click', function(e) {
+                console.log("h");
+                let pegawai = <?php echo $_SESSION['id_pegawai']; ?>;
+                let url = 
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: {
+                        //data nya yg dimasukin buat diterima di file konfirmasi-tambah-hari-libur
+                        pegawai: pegawai,
+                        long: long,
+                        lat: lat
+                    },
+                    //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
+                    dataType: 'json',
+                    success: function(response) {
+                        successRedirectMessage(response.message, dest)
+                    },
+                    error: function(response) {
+                        errorMessage(response.message);
+                    }
+                });
+            });
+        })
+
         $(document).ready(function(){
             load_data();
 
             function load_data(query) { /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"KK-tabel-menu.php",
+                    url:"tabel-hari-libur.php",
                     method:"POST",
                     data:{query:query},
                     success:function(data) {
@@ -52,17 +96,8 @@
                     }
                 });
             }
-
-            $('#cari').keyup(function() { /* jquery ketika terdapat input cari */
-                var pencarian = $(this).val();
-                if(pencarian != '') {
-                    load_data(pencarian);
-                } else {
-                    load_data();
-                }
-            });
         });
     </script>
-    <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

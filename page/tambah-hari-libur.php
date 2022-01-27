@@ -1,24 +1,16 @@
-<?php
-include_once("menu-owner.php");
-include_once("functions.php");
-?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login DaraWeb</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link href="assets/css/style.css?v=1.0" rel="stylesheet">
+    <?php include_once("../page/menu-owner.php"); ?>
+    <?php include_once('../component/header.php') ?>
+    <title>Tambah Hari Libur</title>
+    <?php include_once('../component/script.php') ?>
 </head>
 
 <body>
-    <?php
-    menu_owner();
-    ?>
+    <?php include_once('../component/functions.php') ?>
+    <?php menu_owner(); ?>
     <div class="container-all">
         <div class="head-info">Tambah Hari Libur</div>
         <div class="container-form">
@@ -42,6 +34,7 @@ include_once("functions.php");
             </form>
         </div>
     </div>
+
     <script>
         //variable buat ditampung buat ntr dikirim
         let tanggalAwal;
@@ -73,19 +66,19 @@ include_once("functions.php");
 
         //bikin dilu event submitnya
         $('#formData').on('submit', function(e) {
-            if ($('#ket').val() === "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Kesalahan',
-                    text: 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
-                    confirmButtonText: 'Ok',
-                    iconColor: '#b31200',
-                    width: '35%',
-                    color: '#000000',
-                    confirmButtonColor: '#1e3d59',
-                })
-            }
-            let url = document.location.origin + "/daraweb/konfirmasi-tambah-hari-libur.php";
+            // if ($('#ket').val() === "") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Kesalahan',
+            //         text: 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
+            //         confirmButtonText: 'Ok',
+            //         iconColor: '#b31200',
+            //         width: '35%',
+            //         color: '#000000',
+            //         confirmButtonColor: '#1e3d59',
+            //     })
+            // }
+            let url = document.location.origin + "/daraweb/page/konfir-tambah-libur.php";
             $.ajax({
                 method: "POST",
                 url: url,

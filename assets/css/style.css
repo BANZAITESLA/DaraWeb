@@ -14,7 +14,7 @@ body {
     width: 100vw;
 }
 
-i {
+.menu i {
     width: 40px;
 }
 
@@ -245,9 +245,24 @@ hr {
     width: 60%;
 }
 
+.data-control textarea {
+	border: 1.5px solid #1e3d59;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 5px;
+    width: 60%;
+    resize: none;
+}
+
 .data-control input:focus {
 	outline: 0;
-	border-color: #ff7b00;
+	border-color: #6A6363;
+}
+
+.data-control textarea:focus {
+	outline: 0;
+	border-color: #6A6363;
 }
 
 .data-control select {
@@ -261,7 +276,7 @@ hr {
 
 .data-control select:focus {
 	outline: 0;
-	border-color: #ff7b00;
+	border-color: #6A6363;
 }
 
 .data-submit {
@@ -331,6 +346,11 @@ hr {
     background-color: #ffc13b;
     border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.head-item {
+    padding: 15px;
 }
 
 .head-box-item {
@@ -340,6 +360,10 @@ hr {
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+}
+
+.item-control {
+    position: relative;
 }
 
 .item-control label {
@@ -364,8 +388,9 @@ hr {
 
 .item-control i {
     position: absolute;
-    left: 190;
-    top: 49;
+    right: -10px;
+    top: 4px;
+    cursor: pointer;
 }
 
 .item-control-mp input {
@@ -380,6 +405,22 @@ hr {
 .item-control-mp input:focus {
 	outline: 0;
 	border-color: #1e3d59;
+}
+
+.item-button {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item-button-z {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item-button-c {
+    display: flex;
+    justify-content: center;
 }
 
 .item-button a {
@@ -401,6 +442,45 @@ hr {
     background-color: #12273a;
 }
 
+.item-button-z a {
+	background-color: #1e3d59;
+	border: 2px solid #1e3d59;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	color: #f5f5f5;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 2px;
+    text-decoration: none;
+    width: 70px;
+    text-align: center;
+}
+
+.btn-lokasi {
+	background-color: #1e3d59;
+	border: 2px solid #1e3d59;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	color: #f5f5f5;
+	display: flex;
+    justify-content: center;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 2px;
+    width: 50%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-lokasi:hover {
+    background-color: #12273a;
+}
+
+.item-button-z a:hover {
+    background-color: #12273a;
+}
+
 .container-form {
     width: 72%;
     height: 85%;
@@ -409,6 +489,19 @@ hr {
     transform: translate(-50% , -50%);
     position: absolute;
     padding: 0px;
+}
+
+.container-form-c {
+    width: 72%;
+    height: 85%;
+    top: 54%;
+    left: 38%;
+    transform: translate(-50% , -50%);
+    position: absolute;
+    padding: 0px;
+    background-color: #ffc13b;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .submit {
@@ -511,4 +604,80 @@ hr {
     height: 30px;
     background-color: cyan;
     width: 49.5%;
+}
+/* table */
+
+.table {
+    margin: 0 10px 10px 10px;
+}
+
+.table-z {
+    margin: 20px 0 0 0;
+}
+
+.dataTables_wrapper {
+    font-size: 14px;
+    font-family: inherit;
+}
+
+thead, tr {
+    display:table;
+    table-layout:fixed;
+    width: inherit;
+}
+
+tbody {
+    display:block;
+    overflow-y:auto;
+    max-height:23vw; /* ubah untuk menyesuaikan tinggi tabel */
+    width: 100%;
+}
+
+th {
+    background: #F5F5F5;
+}
+
+td {
+    width: inherit;
+}
+td button {
+    padding: 3px;
+    width: 30px;
+
+    background-color: #6A6363;
+    border-radius: 10px;
+    border: 0 solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    text-decoration: none;
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+td button i {
+    text-align: center;
+}
+
+td button:hover {
+    background-color: #383838;
+}
+
+.display.dataTable.no-footer {
+    padding-top: 10px !important;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    background-color: #f5f5f5 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    background-color: #f5f5f5 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    outline: 0;
+	border-color: #1e3d59;
 }
