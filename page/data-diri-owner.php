@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <?php include_once("../page/menu-owner.php"); ?>
     <?php include_once('../component/header.php') ?>
     <title>Data Diri</title>
     <?php include_once('../component/script.php') ?>
@@ -9,7 +10,6 @@
 
 <body>
     <?php include_once('../component/functions.php') ?>
-    <?php include_once("../page/menu-owner.php"); ?>
     <?php menu_owner(); ?>
     <div class="container-all">
         <div class="head-info">Data Diri</div>

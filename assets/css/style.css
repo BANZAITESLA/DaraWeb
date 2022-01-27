@@ -346,6 +346,7 @@ hr {
     background-color: #ffc13b;
     border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
 .head-item {
@@ -417,6 +418,11 @@ hr {
     justify-content: flex-end;
 }
 
+.item-button-c {
+    display: flex;
+    justify-content: center;
+}
+
 .item-button a {
 	background-color: #1e3d59;
 	border: 2px solid #1e3d59;
@@ -449,6 +455,26 @@ hr {
     text-decoration: none;
     width: 70px;
     text-align: center;
+}
+
+.btn-lokasi {
+	background-color: #1e3d59;
+	border: 2px solid #1e3d59;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	color: #f5f5f5;
+	display: flex;
+    justify-content: center;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 2px;
+    width: 50%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-lokasi:hover {
+    background-color: #12273a;
 }
 
 .item-button-z a:hover {
