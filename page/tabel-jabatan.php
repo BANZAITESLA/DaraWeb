@@ -76,6 +76,7 @@
         }).draw();
 
         //nie event hapus
+        const urlReload = document.URL;
         $(".tombolHapus").on('click', function() {
             var value = $(this).attr('value');
             Swal.fire({
@@ -101,10 +102,7 @@
                             type: 'POST',
                             url: urlHapusJabatan,
                             success: function(response) {
-                                successMessage("Data berhasil dihapus");
-
-                                //nie buat refresh tabel
-                                tabelJabatan.draw();
+                                successRedirectMessage("Data berhasil dihapus", urlReload);
                             },
                             error: function(response) {
                                 errorMessage(response.message);

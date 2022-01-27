@@ -19,7 +19,7 @@
                 <div class="head-box-item">
                     <div class="item-control-mp">
                         <label for="bulan"> Bulan</label>
-                        <input type="month" id="start" name="start" min="2022-01"/>
+                        <input type="text" id="start" name="daterange" autocomplete="off" />
                     </div>
                     <div class="item-button-z">
                         <a href="tambah-hari-libur.php">Tambah</a>
@@ -39,59 +39,78 @@
     </div>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
     <script>
-        navigator.geolocation.getCurrentPosition(function(position) { /* get lokasi user */
-            let lat = position.coords.latitude; 
-            let long = position.coords.longitude; 
+        //variable buat ditampung buat ntr dikirim
+        let url = document.URL;
+
+        $('input[name="daterange"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            format: 'MM/YYYY'
+        }).on('hide.daterangepicker', function(ev, picker) {
+            // $('.table-condensed tbody tr:nth-child(2) td').click();
+            let urlLoad = updateURLParameter(url, 'filter_bulan', decodeURIComponent(picker.startDate.format('MM/YYYY')));
+            // window.location.href = urlLoad;
+            alert(picker.startDate.format('MM/YYYY'));
+            // alert();?filter_tanggal=05-2021
+        });
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+            /* get lokasi user */
+            let lat = position.coords.latitude;
+            let long = position.coords.longitude;
 
             console.log(lat);
             console.log(long);
 
             mapboxgl.accessToken = 'pk.eyJ1IjoiZGVhMTAiLCJhIjoiY2tzOWFwdnlxMHNyaTMxcGU5NnBnaWhtNCJ9.m9atsKQbdp-Vg5a5DMPlMw';
             var map = new mapboxgl.Map({
-            container: 'map',
-            center: [long, lat], 
-            zoom: 15,
-            style: 'mapbox://styles/mapbox/streets-v11'
+                container: 'map',
+                center: [long, lat],
+                zoom: 15,
+                style: 'mapbox://styles/mapbox/streets-v11'
             });
 
             const marker1 = new mapboxgl.Marker()
                 .setLngLat([long, lat])
                 .addTo(map);
-            
+
             $('.btn-lokasi').on('click', function(e) {
                 console.log("h");
                 let pegawai = <?php echo $_SESSION['id_pegawai']; ?>;
-                let url = 
-                $.ajax({
-                    method: "POST",
-                    url: url,
-                    data: {
-                        //data nya yg dimasukin buat diterima di file konfirmasi-tambah-hari-libur
-                        pegawai: pegawai,
-                        long: long,
-                        lat: lat
-                    },
-                    //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
-                    dataType: 'json',
-                    success: function(response) {
-                        successRedirectMessage(response.message, dest)
-                    },
-                    error: function(response) {
-                        errorMessage(response.message);
-                    }
-                });
+                let url =
+                    $.ajax({
+                        method: "POST",
+                        url: url,
+                        data: {
+                            //data nya yg dimasukin buat diterima di file konfirmasi-tambah-hari-libur
+                            pegawai: pegawai,
+                            long: long,
+                            lat: lat
+                        },
+                        //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
+                        dataType: 'json',
+                        success: function(response) {
+                            successRedirectMessage(response.message, dest)
+                        },
+                        error: function(response) {
+                            errorMessage(response.message);
+                        }
+                    });
             });
         })
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             load_data();
 
-            function load_data(query) { /* ajax untuk menampilkan hasil table */
+            function load_data(query) {
+                /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"tabel-hari-libur.php",
-                    method:"POST",
-                    data:{query:query},
-                    success:function(data) {
+                    url: "tabel-hari-libur.php",
+                    method: "POST",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
                         $('#table').html(data);
                     }
                 });

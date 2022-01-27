@@ -5,12 +5,18 @@
         if ($db->connect_errno == 0) {
             try {
                 $id = $db->escape_string($_POST["id"]);
-                $nama = $db->escape_string($_POST["nama"]);
+                $ket = $db->escape_string($_POST["ket"]);
+                $d=strtotime("today");
+                $tgl = date("Y-m-d", $d);
+                $end = str_replace("-", "", $tgl);
+                $id_non = $end . '' . $id;
 
-                $sql = "UPDATE status_pegawai SET nama_status_p = '$nama' WHERE id_status_p = '$id';";
+                $non = "UPDATE pegawai SET status_aktif = 'Non-Aktif' WHERE id_pegawai = '$id'";
+                $sql = "INSERT INTO pegawai_non_aktif (id_pegawai_nonaktif, id_pegawai, tgl_berhenti, keterangan) VALUES ('$id_non', '$id', '$tgl', '$ket');";
+                $res1 = $db->query($non);
                 $res = $db->query($sql);
 
-                if ($res) {
+                if ($res && $res1) {
                     $arr = array();
                     $arr['status'] = "success";
                     $arr['message'] = "Data berhasil disimpan";

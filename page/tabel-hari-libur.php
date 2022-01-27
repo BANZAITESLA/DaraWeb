@@ -22,7 +22,14 @@
             <tbody>
                 <?php
                 if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                    $sql = "SELECT * FROM tanggal_libur";
+                    if (isset($_GET['filter_bulan']) && $_GET['filter_bulan'] != '') {
+                        $bln = substr(urldecode($_GET['filter_bulan']), 0, 2);
+                        $thn =substr(urldecode($_GET['filter_bulan']), 3, 4);
+                        $sql = "SELECT * from tanggal_libur where MONTH(tgl_awal_libur) = '$bln' AND YEAR(tgl_awal_libur) = '$thn';";
+                    } else {
+                        $sql = "SELECT * FROM tanggal_libur";
+
+                    }
                     $res = $db->query($sql);
                     if ($res) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);
@@ -78,6 +85,7 @@
         }).draw();
 
         //nie event hapus
+        const urlReload = document.URL;
         $(".tombolHapus").on('click', function() {
             var value = $(this).attr('value');
             Swal.fire({
@@ -103,10 +111,7 @@
                             type: 'POST',
                             url: urlHapusLibur,
                             success: function(response) {
-                                successMessage("Data berhasil dihapus");
-
-                                //nie buat refresh tabel
-                                tabelLibur.draw();
+                                successRedirectMessage("Data berhasil dihapus", urlReload);
                             },
                             error: function(response) {
                                 errorMessage(response.message);

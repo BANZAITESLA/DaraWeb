@@ -23,7 +23,7 @@
             <tbody>
                 <?php
                 if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                    $sql = "SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p;";
+                    $sql = "SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p WHERE pegawai.status_aktif = 'Aktif';";
                     $res = $db->query($sql);
                     if ($res) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);

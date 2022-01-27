@@ -16,14 +16,14 @@ function menu_owner()
                 <a href="atur-jabatan.php" accesskey="j"><i class="fas fa-cog"></i>Pengaturan Jabatan</a>
                 <a href="atur-status.php" accesskey="s"><i class="fas fa-cog"></i>Pengaturan Status</a>
                 <a href="pegawai-aktif.php" accesskey="a"><i class="fas fa-user-check"></i>Data Pegawai Aktif</a>
-                <a href="#" accesskey="b"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
+                <a href="pegawai-non-aktif.php" accesskey="n"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
                 <hr>
                 <a href="atur-absensi.php" accesskey="a"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
                 <a href="#" accesskey="b"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
                 <a href="#" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
                 <a href="#" accesskey="b"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
                 <hr>
-                <a href="#" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
+                <a href="logout.php" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
             </div>
         </div>
 <?php
@@ -31,8 +31,3 @@ function menu_owner()
         echo '<script type="text/javascript">', 'redirectMessage("Tidak dapat mengakses Sistem. Silahkan Login terlebih dahulu.", "../index.php");', '</script>';
     }
 } ?>
-<script>
-    $(document).on('click', '#logout', function() {
-        askRedirectMessage("Apakah Anda yakin ingin keluar dari Sistem?", "logout.php");
-    })
-</script>

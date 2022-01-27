@@ -19,7 +19,7 @@
             $db=dbConnect();
             if($db->connect_errno==0) {
                 $id = $db->escape_string($_GET['id_pegawai']);
-                $res = $db->query("SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p;");
+                $res = $db->query("SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p WHERE id_pegawai = '$id';");
                 if($res){
                     if($res->num_rows>0){
                         $data=$res->fetch_assoc();

@@ -20,6 +20,10 @@
     ?>
                 <form action="" method="post" id="formData" class="form-info">
                     <div class="data-control">
+                        <label for="nama">ID Pegawai</label>
+                        <input type="text" name="id" id="id" maxlength="8" required/>
+                    </div>
+                    <div class="data-control">
                         <label for="nama">Nama Pegawai</label>
                         <input type="text" name="nama" id="nama" required/>
                     </div>
@@ -101,7 +105,7 @@
                 method: "POST",
                 url: url,
                 data: {
-                    id : id,
+                    id : $('#id').val(),
                     nama : $('#nama').val(),
                     jk : $('#jk').val(),
                     email : $('#email').val(),

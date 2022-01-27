@@ -7,20 +7,23 @@
     include_once('../component/functions.php');
     $db = dbConnect();
     ?>
-    <div class="table" id="table">
+    <div class="table-f" id="table">
         <!-- table -->
-        <table id="tabelStatus" class="display" style="width:100%">
+        <table id="tabelPegawai" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>No Urut</th>
-                    <th>Nama Status Kepegawaian</th>
+                    <th>ID Pegawai</th>
+                    <th>Nama Pegawai</th>
+                    <th>Jabatan</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                    $sql = "SELECT * FROM status_pegawai";
+                    $sql = "SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p WHERE pegawai.status_aktif = 'Non-Aktif';";
                     $res = $db->query($sql);
                     if ($res) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);
@@ -29,10 +32,13 @@
                 ?>
                             <tr>
                                 <td align="center"></td>
+                                <td><?php echo $barisdata["id_pegawai"]; ?></td>
+                                <td><?php echo $barisdata["nama"]; ?></td>
+                                <td><?php echo $barisdata["nama_jabatan"]; ?></td>
                                 <td><?php echo $barisdata["nama_status_p"]; ?></td>
                                 <td align="center">
-                                    <a href="edit-status.php?id_status=<?php echo $barisdata["id_status_p"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
-                                    <button class="tombolHapus" value="<?php echo $barisdata["id_status_p"]; ?>" title="Hapus" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-trash"></i></button>
+                                    <a href="detail-pegawai-nonaktif.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>" ><button title="Detail"><i class="fas fa-info"></i></button></a>
+                                    <button class="tombolHapus" value="<?php echo $barisdata["id_pegawai"]; ?>" title="Hapus" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                 <?php
@@ -45,7 +51,7 @@
     </div>
     <script>
         //nie inisialisasi datata
-        var tabelStatus = $('#tabelStatus').DataTable({
+        var tabelPegawai = $('#tabelPegawai').DataTable({
             order: [
                 [1, 'asc']
             ],
@@ -57,15 +63,15 @@
                     "orderable": false
                 },
                 {
-                    "targets": 2,
+                    "targets": 5,
                     "orderable": false
                 }
             ]
         });
 
         //nie buat no urut otomatis
-        tabelStatus.on('order.dt search.dt', function() {
-            tabelStatus.column(0, {
+        tabelPegawai.on('order.dt search.dt', function() {
+            tabelPegawai.column(0, {
                 search: 'applied',
                 order: 'applied'
             }).nodes().each(function(cell, i) {
@@ -93,11 +99,11 @@
                 if (result.isConfirmed) {
                     /* jika user mengklik 'Hapus' */
                     $(function() {
-                        var urlHapusStatus = document.location.origin + "/daraweb/page/hapus-status.php?id_status=" + value;
+                        var urlHapusJabatan = document.location.origin + "/daraweb/page/hapus-pegawai.php?id_pegawai=" + value;
                         $.ajax({
                             /* ajax hapus sesuai id menu */
                             type: 'POST',
-                            url: urlHapusStatus,
+                            url: urlHapusJabatan,
                             success: function(response) {
                                 successRedirectMessage("Data berhasil dihapus", urlReload);
                             },

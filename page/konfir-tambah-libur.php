@@ -1,6 +1,5 @@
-<?php include_once('../component/script.php') ?>
-<?php include_once('../component/functions.php') ?>
 <?php
+    include_once('../component/functions.php');
     $db = dbConnect();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($db->connect_errno == 0) {
@@ -31,7 +30,7 @@
     
                         $arr = array();
                         $arr['status'] = "success";
-                        $arr['message'] = "Berhasil Disimpan";
+                        $arr['message'] = "Data berhasil disimpan";
                         $response = json_encode($arr);
                         echo $response;
                     }

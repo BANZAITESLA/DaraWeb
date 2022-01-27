@@ -66,18 +66,6 @@
 
         //bikin dilu event submitnya
         $('#formData').on('submit', function(e) {
-            // if ($('#ket').val() === "") {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Kesalahan',
-            //         text: 'Tidak dapat menyimpan data. Pastikan data tidak duplikat.',
-            //         confirmButtonText: 'Ok',
-            //         iconColor: '#b31200',
-            //         width: '35%',
-            //         color: '#000000',
-            //         confirmButtonColor: '#1e3d59',
-            //     })
-            // }
             let url = document.location.origin + "/daraweb/page/konfir-tambah-libur.php";
             $.ajax({
                 method: "POST",

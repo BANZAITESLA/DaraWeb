@@ -3,23 +3,23 @@
 
 <head>
     <?php include_once("../page/menu-owner.php"); ?>
-    <?php include_once('../component/header.php'); ?>
-    <title>Berhentikan Pegawai</title>
-    <?php include_once('../component/script.php'); ?>
+    <?php include_once('../component/header.php') ?>
+    <title>Detail Pegawai</title>
+    <?php include_once('../component/script.php') ?>
 </head>
 
 <body>
-    <?php include_once('../component/functions.php'); ?>
+    <?php include_once('../component/functions.php') ?>
     <?php menu_owner(); ?>
     <div class="container-all">
-        <div class="head-info">Berhentikan Pegawai</div>
+        <div class="head-info">Detail Data Pegawai Non-Aktif</div>
         <div class="container-form">
     <?php
         if (isset($_GET["id_pegawai"])) {
             $db=dbConnect();
             if($db->connect_errno==0) {
                 $id = $db->escape_string($_GET['id_pegawai']);
-                $res = $db->query("SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p WHERE id_pegawai = '$id';");
+                $res = $db->query("SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p JOIN pegawai_non_aktif ON pegawai.id_pegawai = pegawai_non_aktif.id_pegawai WHERE pegawai.id_pegawai = '$id';");
                 if($res){
                     if($res->num_rows>0){
                         $data=$res->fetch_assoc();
@@ -54,20 +54,20 @@
                                 <input type="text" name="tgl" id="tgl" value="<?php echo $data["tgl_diterima"]; ?>" readonly/>
                             </div>
                             <div class="data-control">
+                                <label for="tanggal">Tanggal Diberhentikan</label>
+                                <input type="text" name="tgl_b" id="tgl_b" value="<?php echo $data["tgl_berhenti"]; ?>" readonly/>
+                            </div>
+                            <div class="data-control">
                                 <label for="status">Status Pekerja</label>
                                 <input type="text" name="status" id="status" value="<?php echo $data["nama_status_p"]; ?>" readonly/>
                             </div>
                             <div class="data-control">
-                                <label for="ket">Keterangan Diberhentikan</label>
-                                <textarea type="text" name="ket" id="ket" placeholder="isi keterangan..."></textarea>
+                                <label for="jabatan">Jabatan</label>
+                                <input type="text" name="jabatan" id="jabatan" value="<?php echo $data["nama_jabatan"]; ?>" readonly/>
                             </div>
-                            <div class="submit">
-                                <div class="stop">
-                                    <input type="submit" name="Simpan" value="Berhentikan" />
-                                </div>
-                                <div class="cancel">
-                                    <a href="pegawai-aktif.php">Batal</a>
-                                </div>
+                            <div class="data-control">
+                                <label for="ket">Keterangan</label>
+                                <textarea type="text" name="ket" id="ket" readonly><?php echo $data["keterangan"]; ?></textarea>
                             </div>
                         </form>
     <?php
@@ -82,31 +82,6 @@
     ?>
         </div>
     </div>
-    <script>
-        $('#formData').on('submit', function(e) {
-            let url = document.location.origin + "/daraweb/page/konfir-berhenti.php";
-            let dest = "pegawai-aktif.php";
-            $.ajax({
-                method: "POST",
-                url: url,
-                data: {
-                    id : $('#id').val(),
-                    ket : $('#ket').val()
-                },
-                //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
-                dataType: 'json',
-                success: function(response) {
-                    successRedirectMessage(response.message, dest)
-                },
-                error: function(response) {
-                    errorMessage(response.message);
-                }
-            });
-            //ini maksudna yg dibawah biar fungsi pas mencet simpan gk lngung pke fungsi bawaan ke action di formnya tp di batalin jadi di handle sm ajax
-            e.preventDefault();
-            return false;
-        });
-    </script>
 </body>
 
 </html>

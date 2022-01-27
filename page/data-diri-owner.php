@@ -75,7 +75,7 @@
         $('#formData').on('submit', function(e) {
             let id = <?php echo $_SESSION["id_pegawai"]; ?>;
             let url = document.location.origin + "/daraweb/page/konfir-data-diri.php";
-            let dest = "pegawai-aktif.php";
+            let dest = "data-diri-owner.php";
             $.ajax({
                 method: "POST",
                 url: url,

@@ -38,7 +38,7 @@
     <script>
         $('#formData').on('submit', function(e) {
             let url = document.location.origin + "/daraweb/page/konfir-tambah-jabatan.php";
-            let dest = "atur-jabatan.php";
+            let dest = document.location.origin + "/daraweb/page/atur-jabatan.php";
             $.ajax({
                 method: "POST",
                 url: url,
@@ -51,11 +51,9 @@
                 dataType: 'json',
                 success: function(response) { //! ni gk tau gimnaaaaaa
                     successRedirectMessage(response.message, dest); 
-                    console.log(response.message);
                 },
                 error: function(response) {
                     errorMessage(response.message);
-                    console.log(response.message);
                 }
             });
             //ini maksudna yg dibawah biar fungsi pas mencet simpan gk lngung pke fungsi bawaan ke action di formnya tp di batalin jadi di handle sm ajax
