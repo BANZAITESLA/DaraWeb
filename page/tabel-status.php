@@ -32,7 +32,7 @@
                                 <td><?php echo $barisdata["nama_status_p"]; ?></td>
                                 <td align="center">
                                     <a href="edit-status.php?id_status=<?php echo $barisdata["id_status_p"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
-                                    <button class="tombolHapus" value="<?php echo $barisdata["id_status_p"]; ?>" title="Hapus"><i class="fas fa-trash"></i></button>
+                                    <button class="tombolHapus" value="<?php echo $barisdata["id_status_p"]; ?>" title="Hapus" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                 <?php

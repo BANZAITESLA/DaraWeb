@@ -37,9 +37,9 @@
                                 <td><?php echo $barisdata["nama_jabatan"]; ?></td>
                                 <td><?php echo $barisdata["nama_status_p"]; ?></td>
                                 <td align="center">
-                                    <a href="detail-pegawai-aktif.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>"><button title="Detail"><i class="fas fa-info"></i></button></a>
+                                    <a href="detail-pegawai-aktif.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>" ><button title="Detail"><i class="fas fa-info"></i></button></a>
                                     <a href="edit-pegawai.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
-                                    <a href="berhentikan-pegawai.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>"><button title="Berhentikan"><i class="fas fa-user-slash"></i></button></a>
+                                    <a href="berhentikan-pegawai.php?id_pegawai=<?php echo $barisdata["id_pegawai"]; ?>"><button title="Berhentikan" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-user-slash"></i></button></a>
                                 </td>
                             </tr>
                 <?php

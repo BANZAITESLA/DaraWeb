@@ -6,15 +6,15 @@
         if ($db->connect_errno == 0) {
             try {
                 $id = $db->escape_string($_POST["id"]);
-                $nama = $db->escape_string($_POST["nama"]);
+                $ket = $db->escape_string($_POST["ket"]);
 
-                $sql = "UPDATE status_pegawai SET nama_status_p = '$nama' WHERE id_status_p = '$id';";
+                $sql = "UPDATE tanggal_libur SET ket = '$ket' WHERE id_tgl = '$id';";
                 $res = $db->query($sql);
 
                 if ($res) {
                     $arr = array();
                     $arr['status'] = "success";
-                    $arr['message'] = "Data berhasil disimpan";
+                    $arr['message'] = "Berhasil Disimpan";
                     $response = json_encode($arr);
                     echo $response;
                 }

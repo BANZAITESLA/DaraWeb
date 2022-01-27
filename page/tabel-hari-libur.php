@@ -7,21 +7,22 @@
     include_once('../component/functions.php');
     $db = dbConnect();
     ?>
-    <div class="table" id="table">
+    <div class="table-z" id="table">
         <!-- table -->
-        <table id="tabelJabatan" class="display" style="width:100%">
+        <table id="tabelLibur" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>No Urut</th>
-                    <th>Nama Jabatan</th>
-                    <th>Jenis Jabatan</th>
+                    <th>Tanggal Awal</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                    $sql = "SELECT * FROM jabatan";
+                    $sql = "SELECT * FROM tanggal_libur";
                     $res = $db->query($sql);
                     if ($res) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);
@@ -30,11 +31,12 @@
                 ?>
                             <tr>
                                 <td align="center"></td>
-                                <td><?php echo $barisdata["nama_jabatan"]; ?></td>
-                                <td><?php echo $barisdata["jenis_jabatan"]; ?></td>
+                                <td><?php echo $barisdata["tgl_awal_libur"]; ?></td>
+                                <td><?php echo $barisdata["tgl_akhir_libur"]; ?></td>
+                                <td><?php echo $barisdata["ket"]; ?></td>
                                 <td align="center">
-                                    <a href="edit-jabatan.php?id_jabatan=<?php echo $barisdata["id_jabatan"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
-                                    <button class="tombolHapus" value="<?php echo $barisdata["id_jabatan"]; ?>" title="Hapus" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-trash"></i></button>
+                                    <a href="edit-hari-libur.php?id_tgl=<?php echo $barisdata["id_tgl"]; ?>"><button title="Edit"><i class="fas fa-user-edit"></i></button></a>
+                                    <button class="tombolHapus" value="<?php echo $barisdata["id_tgl"]; ?>" title="Hapus" style="background-color: #b31200;" onmouseover="this.style.backgroundColor='#920f00'" onMouseOut="this.style.backgroundColor='#b31200'"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                 <?php
@@ -47,7 +49,7 @@
     </div>
     <script>
         //nie inisialisasi datata
-        var tabelJabatan = $('#tabelJabatan').DataTable({
+        var tabelLibur = $('#tabelLibur').DataTable({
             order: [
                 [1, 'asc']
             ],
@@ -59,15 +61,15 @@
                     "orderable": false
                 },
                 {
-                    "targets": 3,
+                    "targets": 4,
                     "orderable": false
                 }
             ]
         });
 
         //nie buat no urut otomatis
-        tabelJabatan.on('order.dt search.dt', function() {
-            tabelJabatan.column(0, {
+        tabelLibur.on('order.dt search.dt', function() {
+            tabelLibur.column(0, {
                 search: 'applied',
                 order: 'applied'
             }).nodes().each(function(cell, i) {
@@ -95,16 +97,16 @@
                 if (result.isConfirmed) {
                     /* jika user mengklik 'Hapus' */
                     $(function() {
-                        var urlHapusJabatan = document.location.origin + "/daraweb/page/hapus-jabatan.php?id_jabatan=" + value;
+                        var urlHapusLibur = document.location.origin + "/daraweb/page/hapus-libur.php?id_tgl=" + value;
                         $.ajax({
                             /* ajax hapus sesuai id menu */
                             type: 'POST',
-                            url: urlHapusJabatan,
+                            url: urlHapusLibur,
                             success: function(response) {
                                 successMessage("Data berhasil dihapus");
 
                                 //nie buat refresh tabel
-                                tabelJabatan.draw();
+                                tabelLibur.draw();
                             },
                             error: function(response) {
                                 errorMessage(response.message);
