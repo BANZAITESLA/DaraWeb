@@ -17,12 +17,12 @@
                 $username = $db->escape_string($_POST["username"]);
                 $password = $db->escape_string($_POST["password"]);
 
-                $cek_user = "SELECT id_pegawai FROM `pegawai` WHERE id_pegawai = '$username'";
+                $cek_user = "SELECT id_pegawai FROM `pegawai` WHERE id_pegawai = '$username' AND status_aktif = 'Aktif'";
                 $res1 = $db->query($cek_user);
 
                 if ($res1) {
                     if ($res1->num_rows == 1) {
-                        $cek_pass = "SELECT id_pegawai, nama FROM `pegawai` WHERE id_pegawai = '$username' and `password` = md5('$password')";
+                        $cek_pass = "SELECT * FROM `pegawai` JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan WHERE pegawai.id_pegawai = '$username' AND pegawai.password = md5('$password');";
                         $res2 = $db->query($cek_pass);
                         if ($res2) {
                             if ($res2->num_rows == 1) {
@@ -30,7 +30,7 @@
                                 $_SESSION['id_pegawai'] = $data['id_pegawai'];
                                 $_SESSION['nama'] = $data['nama'];
 
-                                if ($username == '12345678') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                if ($data['nama_jabatan'] == 'Pemilik Usaha') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                     $url = "/daraweb/page/beranda-owner.php";
                                 } else {
                                     $url = "/daraweb/page/beranda-pegawai.php";
@@ -70,7 +70,7 @@
             </div>
             <a href="./page/lupa-password.php">Lupa Password?</a>
             <div class="form-submit">
-                <input type="submit" name="Masuk" value="Masuk" />
+                <input type="submit" name="Masuk" value="Masuk" style="opacity: 100%; border-color: #1e3d59;"/>
             </div>
         </form>
     </div>

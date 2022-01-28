@@ -21,7 +21,7 @@
             <tbody>
                 <?php
                 if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                    $sql = "SELECT * FROM jabatan";
+                    $sql = "SELECT * FROM jabatan WHERE nama_jabatan != 'Pemilik Usaha';";
                     $res = $db->query($sql);
                     if ($res) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);

@@ -19,7 +19,7 @@
                 } else {
                     $sql = "UPDATE pegawai SET nama = '$nama', jenis_kelamin = '$jk', email = '$email', no_hp = '$nohp', alamat = '$alamat', id_status_p = '$status', id_jabatan = '$jabatan', password = md5('$pass') WHERE id_pegawai = '$id';";
                 }
-
+                echo '<script type="text/javascript">', 'alert(' . $sql . ');', '</script>';
                 $res = $db->query($sql);
 
                 if ($res) {

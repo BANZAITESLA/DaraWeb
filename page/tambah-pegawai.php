@@ -65,10 +65,11 @@
                         <label for="jabatan">Jabatan</label>
                         <select name="jabatan" id="jabatan">
                             <?php
-                                $cek_jabatan = $db -> query("SELECT * FROM `jabatan` ORDER BY id_jabatan;");
+                                $cek_jabatan = $db -> query("SELECT * FROM `jabatan` WHERE nama_jabatan != 'Pemilik Usaha' ORDER BY id_jabatan;");
                                 if ($cek_jabatan) {
                                     $data_jabatan = $cek_jabatan -> fetch_all(MYSQLI_ASSOC);
                                     foreach ($data_jabatan as $datajabatan) {
+                                        
                                         echo "<option value=\"" . $datajabatan["id_jabatan"] . "\"";
                                         echo ">" . $datajabatan["nama_jabatan"] . "</option>";
                                     }

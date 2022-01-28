@@ -836,3 +836,11 @@ td button:hover {
     outline: 0;
 	border-color: #1e3d59;
 }
+
+input:read-only {
+    border-color: #757575;
+}
+
+textarea:read-only {
+    border-color: #757575;
+}

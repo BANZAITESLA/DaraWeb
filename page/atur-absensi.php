@@ -11,8 +11,8 @@
 <body>
     <?php include_once('../component/functions.php'); ?>
     <?php
-    menu_owner();
-    $db = dbConnect();
+        menu_owner();
+        $db = dbConnect();
     ?>
     <div class="container-all">
         <div class="head-info">Pengaturan Absensi</div>

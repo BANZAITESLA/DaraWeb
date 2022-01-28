@@ -27,8 +27,8 @@ try {
     //Recipients
     $mail->setFrom('do.not.reply@daraweb.deainesia.my.id', 'Daraweb');
     // $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
-    $mail->addAddress('deainesia223@gmail.com');               //Name is optional
-    // $mail->addReplyTo('info@example.com', 'Information');
+    $mail->addAddress('deainesia@gmail.com');               //Name is optional
+    $mail->addReplyTo('do.not.reply@daraweb.deainesia.my.id', 'Daraweb');
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
@@ -39,7 +39,21 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Body    = '
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dea Cimol</title>
+    </head>
+    <body>
+        <h1>Pemberitahuan Cimol</h1>
+        <p>Pemrisi Cimolnya Udah Jadi Silahkan di Makan</p>
+    </body>
+    </html>
+    ';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();

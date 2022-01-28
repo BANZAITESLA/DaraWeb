@@ -72,6 +72,7 @@
             // }
             let url = document.location.origin + "/daraweb/page/konfir-edit-libur.php";
             let id = <?php echo $_GET['id_tgl']; ?>;
+            let dest = "atur-absensi.php";
             $.ajax({
                 method: "POST",
                 url: url,
@@ -86,7 +87,7 @@
                     if (response.status == 'error') {
                         errorMessage(response.message);
                     } else {
-                        succesMessage(response.message);
+                        successRedirectMessage(response.message, dest)
                     }
                 },
                 error: function(response) {

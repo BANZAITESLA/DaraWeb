@@ -17,7 +17,7 @@
             <div class="head-box-item" style="margin: 20px;">
                     <div class="item-control-mp">
                         <label for="bulan">Tanggal</label>
-                        <input type="month" id="month_year" name="month_year"/>
+                        <input type="date" id="date" name="date"/>
                     </div>
                 </div>
             <div class="table" id="table"></div> <!-- tempat table -->

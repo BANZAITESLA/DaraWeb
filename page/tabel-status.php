@@ -99,7 +99,11 @@
                             type: 'POST',
                             url: urlHapusStatus,
                             success: function(response) {
-                                successRedirectMessage("Data berhasil dihapus", urlReload);
+                                if (response.status == 'error') {
+                                    errorMessage(response.message);
+                                } else {
+                                    successRedirectMessage("Data berhasil dihapus", urlReload);
+                                }
                             },
                             error: function(response) {
                                 errorMessage(response.message);
