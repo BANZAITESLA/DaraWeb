@@ -432,6 +432,20 @@ hr {
 	border-color: #1e3d59;
 }
 
+.item-control-mp select {
+    border: 2px solid #f5f5f5;
+	border-radius: 10px;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 0px 3px;
+    width: 200px;
+}
+
+.item-control-mp select:focus {
+	outline: 0;
+	border-color: #1e3d59;
+}
+
 .item-button {
     margin: 20px;
     display: flex;
@@ -763,9 +777,4 @@ td button:hover {
 .dataTables_wrapper .dataTables_filter input:focus {
     outline: 0;
 	border-color: #1e3d59;
-}
-
-.table-condensed thead tr:nth-child(2),
-.table-condensed tbody {
-  display: none
 }

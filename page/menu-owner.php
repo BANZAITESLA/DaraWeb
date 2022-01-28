@@ -19,7 +19,7 @@ function menu_owner()
                 <a href="pegawai-non-aktif.php" accesskey="n"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
                 <hr>
                 <a href="atur-absensi.php" accesskey="a"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
-                <a href="#" accesskey="b"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
+                <a href="ajuan-izin-cuti.php" accesskey="i"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
                 <a href="#" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
                 <a href="#" accesskey="b"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
                 <hr>

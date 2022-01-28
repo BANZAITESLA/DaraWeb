@@ -4,15 +4,18 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($db->connect_errno == 0) {
             try {
+                $id = $db->escape_string($_POST["id"]);
+                $ajuan = $db->escape_string($_POST["ajuan"]);
+                $verif = $db->escape_string($_POST["verif"]);
+                $ket = $db->escape_string($_POST["ket"]);
                 $startDate = $db->escape_string($_POST["startDate"]);
                 $endDate = $db->escape_string($_POST["endDate"]);
-                $start = str_replace("-", "", $startDate);
-                $end = str_replace("-", "", $endDate);
-                $id_re = $start . '' . $end . '01';
-                $ket = $db->escape_string($_POST["ket"]);
-                $periode = substr($end, 2, 2);
+                $start = substr(str_replace("-", "", $startDate), 2);
+                $end = substr(str_replace("-", "", $endDate), 2);
+                $id_re = $start . '' . $end . $id .'02';
+                $periode = substr(str_replace("-", "", $endDate), 2, 2);;
     
-                $cek_id = "SELECT id_report FROM `tanggal_libur` WHERE id_report = '$id_re';";
+                $cek_id = "SELECT id_report FROM `izin_cuti` WHERE id_report = '$id_re';";
                 $res3 = $db->query($cek_id);
     
                 if ($res3) {
@@ -23,8 +26,9 @@
                         $response = json_encode($arr);
                         echo $response;
                     } else {
-                        $insert_re = "INSERT INTO `report_event` (`id_report`,`status`, `periode`) VALUES ('$id_re','Libur', '$periode');";
-                        $insert_li = "INSERT INTO `tanggal_libur` (`tgl_awal_libur`, `tgl_akhir_libur`, `ket`, `id_report`) VALUES ('$startDate', '$endDate', '$ket', '$id_re');";
+                        $insert_re = "INSERT INTO `report_event` (`id_report`,`status`, `periode`) VALUES ('$id_re','$ajuan', '$periode');";
+                        $insert_li = "INSERT INTO `izin_cuti` (`id_pegawai`, `tanggal_awal_izin`, `tanggal_akhir_izin`, `verifikasi`, `keterangan`, `id_report`) VALUES 
+                                                                ('$id', '$startDate', '$endDate', '$verif', '$ket', '$id_re');";
                         $res1 = $db->query($insert_re);
                         $res2 = $db->query($insert_li);
     
