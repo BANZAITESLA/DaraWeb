@@ -20,7 +20,7 @@ function menu_owner()
                 <hr>
                 <a href="atur-absensi.php" accesskey="a"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
                 <a href="ajuan-izin-cuti.php" accesskey="i"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
-                <a href="#" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
+                <a href="log-absensi.php" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
                 <a href="#" accesskey="b"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
                 <hr>
                 <a href="logout.php" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
