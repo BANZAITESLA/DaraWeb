@@ -18,10 +18,10 @@ function menu_owner()
                 <a href="pegawai-aktif.php" accesskey="a"><i class="fas fa-user-check"></i>Data Pegawai Aktif</a>
                 <a href="pegawai-non-aktif.php" accesskey="n"><i class="fas fa-user-times"></i>Data Pegawai Non-Aktif</a>
                 <hr>
-                <a href="atur-absensi.php" accesskey="a"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
+                <a href="atur-absensi.php" accesskey="n"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
                 <a href="ajuan-izin-cuti.php" accesskey="i"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
-                <a href="log-absensi.php" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
-                <a href="#" accesskey="b"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
+                <a href="log-absensi.php" accesskey="l"><i class="fas fa-list"></i>Log Absensi</a>
+                <a href="laporan-absensi.php" accesskey="p"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
                 <hr>
                 <a href="logout.php" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
             </div>

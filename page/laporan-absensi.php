@@ -4,7 +4,7 @@
 <head>
     <?php include_once("../page/menu-owner.php"); ?>
     <?php include_once('../component/header.php') ?>
-    <title>Log Absensi</title>
+    <title>Laporan Absensi</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
@@ -12,12 +12,15 @@
     <?php include_once('../component/functions.php') ?>
     <?php menu_owner(); ?>
     <div class="container-all">
-        <div class="head-info">Log Absensi</div>
+        <div class="head-info">Laporan Absensi</div>
         <div class="container-form-c">
             <div class="head-box-item" style="margin: 20px;">
                     <div class="item-control-mp">
-                        <label for="bulan">Tanggal</label>
+                        <label for="bulan">Bulan</label>
                         <input type="month" id="month_year" name="month_year"/>
+                    </div>
+                    <div class="item-control-mp">
+                        <label for="bulan">Jumlah kehadiran penuh : <?php ; ?> hari</label>
                     </div>
                 </div>
             <div class="table" id="table"></div> <!-- tempat table -->
@@ -29,7 +32,7 @@
 
             function load_data(query) { /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"tabel-log.php",
+                    url:"tabel-laporan.php",
                     method:"POST",
                     data:{query:query},
                     success:function(data) {
