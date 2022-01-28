@@ -651,7 +651,10 @@ hr {
     align-items: center;
     margin-bottom: 10px;
     width: 100%;
-    background-color: red;
+    background-color: #ffc13b;
+    border-radius: 10px;
+    border: 0 solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .beranda-box-1 .box1 .box-icon {
@@ -661,42 +664,97 @@ hr {
     align-items: center;
     justify-content: center;
     color: white;
-    height: 80px;
+    height: 60px;
     width: 100px;
-    background-color: black;
+    background-color: #1e3d59;
+    border-radius: 10px 0 0 10px;
+    border: 0 solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.beranda-box-1 .box1 .box-icon i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+.box-icon i {
+    font-size: 24px;
 }
+
 .beranda-box-2 .wrapper-1{
     display: flex;
     justify-content: space-between;
     height: 30px;
-    background-color: blue;
-    margin-bottom: 10px;
+    margin-bottom: 130px;
 }
 
-.beranda-box-2 .wrapper-1 .box2{
+.beranda-box-2 .wrapper-1 button{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border: 0 solid;
+    cursor: pointer;
+}
+
+.beranda-box-2 .wrapper-1 button{
     height: 30px;
-    background-color: cyan;
+    background-color: #ffc13b;
     width: 49.5%;
+    border-radius: 10px;
+    border: 0 solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    height: 150px;
+}
+
+.beranda-box-2 .wrapper-2 button{
+    height: 30px;
+    background-color: #ffc13b;
+    width: 49.5%;
+    border-radius: 10px;
+    border: 0 solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    height: 150px;
 }
 
 .beranda-box-2 .wrapper-2{
     height: 30px;
     display: flex;
     justify-content: space-between;
-    background-color: blue;
 }
 
-.beranda-box-2 .wrapper-2 .box2{
-    height: 30px;
-    background-color: cyan;
-    width: 49.5%;
+.beranda-box-1 button {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0 solid;
+    cursor: pointer;
+}
+
+.box-icon-go {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.box-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box2 {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box2 span {
+    width: 85%;
+    line-height: 30px;
 }
 /* table */
 
