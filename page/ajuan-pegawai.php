@@ -4,7 +4,7 @@
 <head>
     <?php include_once("../page/menu-pgw.php"); ?>
     <?php include_once('../component/header.php') ?>
-    <title>Hari Libur</title>
+    <title>Pengajuan Izin dan Cuti</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
@@ -12,12 +12,30 @@
     <?php include_once('../component/functions.php') ?>
     <?php menu_pgw(); ?>
     <div class="container-all">
-        <div class="head-info">Hari Libur</div>
+        <div class="head-info">Pengajuan Izin dan Cuti</div>
         <div class="container-form-c">
             <div class="head-box-item" style="margin: 20px;">
                     <div class="item-control-mp">
                         <label for="bulan">Bulan</label>
                         <input type="month" id="month_year" name="month_year"/>
+                    </div>
+                <div class="item-control-mp">
+                    <label for="ajuan">Ajuan</label>
+                    <select name="ajuan" id="ajuan" style="padding: 2px 0;">
+                        <option value="Izin">Izin</option>
+                        <option value="Cuti">Cuti</option>
+                    </select>
+                </div>
+                <div class="item-control-mp">
+                    <label for="verif">Verifikasi</label>
+                    <select name="verif" id="verif" style="padding: 2px 0;">
+                        <option value="Belum Dikonfirmasi">Belum Dikonfirmasi</option>
+                        <option value="Diizinkan">Diizinkan</option>
+                        <option value="Ditolak">Ditolak</option>
+                    </select>
+                </div>
+                    <div class="item-button-z">
+                        <a href="tambah-pengajuan.php">Ajukan</a>
                     </div>
                 </div>
             <div class="table" id="table"></div> <!-- tempat table -->
@@ -29,7 +47,7 @@
 
             function load_data(query) { /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"tabel-libur-pegawai.php",
+                    url:"tabel-pengajuan.php",
                     method:"POST",
                     data:{query:query},
                     success:function(data) {

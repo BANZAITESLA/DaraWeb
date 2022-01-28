@@ -2,38 +2,23 @@
 <html lang="en">
 
 <head>
-    <?php include_once("../page/menu-owner.php"); ?>
+    <?php include_once("../page/menu-pgw.php"); ?>
     <?php include_once('../component/header.php') ?>
-    <title>Tambah Ajuan</title>
+    <title>Ajukan Izin / Cuti</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
 <body>
     <?php include_once('../component/functions.php') ?>
-    <?php menu_owner(); ?>
+    <?php menu_pgw(); ?>
     <div class="container-all">
-        <div class="head-info">Tambah Ajuan Izin dan Cuti</div>
+        <div class="head-info">Ajukan Izin / Cuti</div>
         <div class="container-form">
         <?php
             $db=dbConnect();
             if($db->connect_errno==0) {
         ?>
             <form action="" method="post" id="formData" class="form-info">
-                <div class="data-control">
-                    <label for="nama">Nama Pegawai</label>
-                    <select name="nama" id="nama">
-                        <?php
-                            $cek_nama = $db -> query("SELECT id_pegawai, nama FROM `pegawai` WHERE status_aktif = 'Aktif' ORDER BY nama;");
-                            if ($cek_nama) {
-                                $data_nama = $cek_nama -> fetch_all(MYSQLI_ASSOC);
-                                foreach ($data_nama as $datanama) {
-                                    echo "<option value=\"" . $datanama["id_pegawai"] . "\"";
-                                    echo ">" . $datanama["nama"] . "</option>";
-                                }
-                            }
-                        ?>
-                    </select>
-                </div>
                 <div class="data-control">
                     <label for="ajuan">Ajuan</label>
                     <select name="ajuan" id="ajuan">
@@ -46,14 +31,6 @@
                     <input type="text" placeholder="klik untuk mengisi tanggal" name="daterange" id="tanggal_libur" required readonly />
                 </div>
                 <div class="data-control">
-                    <label for="verif">Verifikasi</label>
-                    <select name="verif" id="verif">
-                        <option value="Belum Dikonfirmasi">Belum Dikonfirmasi</option>
-                        <option value="Diizinkan">Diizinkan</option>
-                        <option value="Tidak Diizinkan">Tidak Diizinkan</option>
-                    </select>
-                </div>
-                <div class="data-control">
                     <label for="ket">Keterangan</label>
                     <textarea type="text" name="ket" id="ket" required></textarea>
                 </div>
@@ -62,7 +39,7 @@
                         <input type="submit" name="Simpan" value="Simpan" />
                     </div>
                     <div class="cancel">
-                        <a href="ajuan-izin-cuti.php">Batal</a>
+                        <a href="ajuan-pegawai.php">Batal</a>
                     </div>
                 </div>
             </form>
@@ -105,18 +82,16 @@
 
         //bikin dilu event submitnya
         $('#formData').on('submit', function(e) {
-            let url = document.location.origin + "/daraweb/page/konfir-tambah-ajuan.php";
-            let dest = "ajuan-izin-cuti.php";
+            let url = document.location.origin + "/daraweb/page/konfir-pengajuan.php";
+            let dest = "ajuan-pegawai.php";
             $.ajax({
                 method: "POST",
                 url: url,
                 data: {
                     //data nya yg dimasukin buat diterima di file konfirmasi-tambah-hari-libur
-                    id: $('#nama').val(),
                     ajuan: $('#ajuan').val(),
                     startDate: tanggalAwal,
                     endDate: tanggalAkhir,
-                    verif: $('#verif').val(),
                     ket: $('#ket').val()
                 },
                 //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya

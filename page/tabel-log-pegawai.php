@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <head>
     <?php include_once('../component/script.php') ?>
 </head>
@@ -14,7 +17,6 @@
                 <tr>
                     <th>No Urut</th>
                     <th>Waktu Absen</th>
-                    <th>Nama Pegawai</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -45,7 +47,7 @@
                     //     $day = 'Minggu';
                     // }
 
-                    $sql = "SELECT log_absen.waktu_absen, pegawai.nama, report_event.status FROM log_absen JOIN pegawai ON log_absen.id_pegawai = pegawai.id_pegawai JOIN report_event ON log_absen.id_report = report_event.id_report WHERE DATE_FORMAT(log_absen.waktu_absen, '%Y-%m-%d') = '$tgl';";
+                    $sql = "SELECT log_absen.waktu_absen, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE DATE_FORMAT(log_absen.waktu_absen, '%Y-%m-%d') = '$tgl' AND log_absen.id_pegawai = '$_SESSION[id_pegawai]';";
                     $res = $db->query($sql);
                     // $jam_hari = "SELECT * FROM `jam_operasional` WHERE hari = '$day';";
                     // $res_jam = $db->query($jam_hari);
@@ -57,7 +59,6 @@
                             <tr>
                                 <td align="center"></td>
                                 <td><?php echo $barisdata["waktu_absen"]; ?></td>
-                                <td><?php echo $barisdata["nama"]; ?></td>
                                 <td>
                                     <?php
                                         echo $barisdata["status"];

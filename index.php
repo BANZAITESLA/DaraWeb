@@ -30,7 +30,7 @@
                                 $_SESSION['id_pegawai'] = $data['id_pegawai'];
                                 $_SESSION['nama'] = $data['nama'];
 
-                                if ($username = '12345678') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                if ($username == '12345678') {  // !XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                     $url = "/daraweb/page/beranda-owner.php";
                                 } else {
                                     $url = "/daraweb/page/beranda-pegawai.php";

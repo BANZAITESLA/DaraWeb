@@ -4,7 +4,7 @@
 <head>
     <?php include_once("../page/menu-pgw.php"); ?>
     <?php include_once('../component/header.php') ?>
-    <title>Hari Libur</title>
+    <title>Log Absensi</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
@@ -12,7 +12,7 @@
     <?php include_once('../component/functions.php') ?>
     <?php menu_pgw(); ?>
     <div class="container-all">
-        <div class="head-info">Hari Libur</div>
+        <div class="head-info">Log Absensi <?php echo $_SESSION['nama'];?></div>
         <div class="container-form-c">
             <div class="head-box-item" style="margin: 20px;">
                     <div class="item-control-mp">
@@ -29,7 +29,7 @@
 
             function load_data(query) { /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"tabel-libur-pegawai.php",
+                    url:"tabel-log-pegawai.php",
                     method:"POST",
                     data:{query:query},
                     success:function(data) {

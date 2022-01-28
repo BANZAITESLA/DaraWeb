@@ -46,7 +46,7 @@
                                 <select name="verif" id="verif">
                                     <option value="Belum Dikonfirmasi" <?php if ($data["verifikasi"] == "Belum Dikonfirmasi") { echo "selected='selected'"; } ?>>Belum Dikonfirmasi</option>
                                     <option value="Diizinkan" <?php if ($data["verifikasi"] == "Diizinkan") { echo "selected='selected'"; } ?>>Diizinkan</option>
-                                    <option value="Ditolak" <?php if ($data["verifikasi"] == "Ditolak") { echo "selected='selected'"; } ?>>Ditolak</option>
+                                    <option value="Tidak Diizinkan" <?php if ($data["verifikasi"] == "Tidak Diizinkan") { echo "selected='selected'"; } ?>>Tidak Diizinkan</option>
                                 </select>
                             </div>
                             <div class="submit">
