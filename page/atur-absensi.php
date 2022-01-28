@@ -272,7 +272,7 @@
                                     successMessage("Data berhasil dihapus");
 
                                     //nie buat refresh tabel
-                                    tabelLibur.draw();
+                                    window.location.href = document.URL;
                                 },
                                 error: function(response) {
                                     errorMessage(response.message);
