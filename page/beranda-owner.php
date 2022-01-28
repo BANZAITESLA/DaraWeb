@@ -18,6 +18,8 @@
                 $d=strtotime("today");
                 $tgl = date("Y-m-d", $d);
                 $day = date("l", $d);
+                $sum = date("t", $d);
+                $month = date("m", $d);
                 if ($day == 'Monday') {
                     $day = 'Senin';
                 } else if ($day == 'Tuesday') {
@@ -169,9 +171,32 @@
                                 </div>
                             </div>
                         </button>
-                        <button id="enam">
+                        <button id="enam" style="cursor: pointer;">
                             <div class="box2">
-                            <span>Bulan ini, kami mencatat jumlah hari kerja Toko Anda adalah sebanyak <??> hari! <br><br> dan libur sebanyak <??> hari..</span>
+                            <span>Bulan ini, kami mencatat jumlah hari kerja Toko Anda adalah sebanyak
+                                <?php 
+                                    $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                                    $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                                    if($res6){
+                                        if($res6->num_rows>0){
+                                            $data6=$res6->fetch_assoc();
+                                            if ($res7) {
+                                                $data7 = $res7->fetch_all(MYSQLI_ASSOC);
+                                                $x = 0;
+                                                foreach ($data7 as $barisdata) {
+                                                    $startTimeStamp = strtotime($barisdata['tgl_awal_libur']);
+                                                    $endTimeStamp = strtotime($barisdata['tgl_akhir_libur']);
+                                                    $timeDiff = abs($endTimeStamp - $startTimeStamp);
+                                                    $numberDays = $timeDiff/86400;
+                                                    $numberDays = intval($numberDays);
+                                                    $x = $x + $numberDays;
+                                                }
+                                                $total = $sum - $x;
+                                                echo $total;
+                                            }
+                                        }
+                                    }
+                                    ?> hari! <br><br> dan libur sebanyak <?php echo $x;?> hari..</span>
                                 <div class="box-icon">
                                     <i class="fas fa-calendar" style="font-size: 36px;"></i>
                                     <i class="fas fa-chevron-right" style="font-size: 24px;"></i>
@@ -200,6 +225,9 @@
         });
         $("#lima").on('click', function() {
             window.location.href="ajuan-izin-cuti.php";
+        });
+        $("#enam").on('click', function() {
+            window.location.href="atur-absensi.php";
         });
     </script>
 </body>
