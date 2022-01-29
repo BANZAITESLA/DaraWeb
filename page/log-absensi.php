@@ -60,33 +60,6 @@
                                     <td>
                                         <?php
                                             echo $barisdata["status"];
-                                            // $jam_hari = "SELECT * FROM `jam_operasional` WHERE hari = '$day';";
-                                            // $res_jam = $db->query($jam_hari);
-                                            // if ($barisdata["status"] == 'Terlambat') {
-                                            //     if ($res_jam) {
-                                            //         $data_jam = $res_jam->fetch_assoc();
-                                            //         // $time = [$data_jam['jam_buka'], $data_jam['toleransi']];
-                                            //         // $sum = strtotime('00:00:00');
-                                            //         // $totaltime = 0;
-                                            //         // foreach( $time as $element ) {
-        
-                                            //         //     // Converting the time into seconds
-                                            //         //     $timeinsec = strtotime($element) - $sum;
-                                                        
-                                            //         //     // Sum the time with previous value
-                                            //         //     $totaltime = $totaltime + $timeinsec;
-                                            //         // }
-                                            //         // $h = intval($totaltime / 3600);                                       
-                                            //         // $totaltime = $totaltime - ($h * 3600);
-                                            //         // $m = intval($totaltime / 60);
-                                            //         // $s = $totaltime - ($m * 60);
-                                                    
-                                            //         //Printing the result
-                                            //         echo $barisdata['status'] . "";
-                                            //     }
-                                            // } else {
-                                            //     echo $barisdata["status"];
-                                            // }
                                         ?>
                                     </td>
                                 </tr>

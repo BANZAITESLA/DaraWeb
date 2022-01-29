@@ -104,7 +104,8 @@
                             $lok = $res_lok->fetch_assoc();
                             if ($lok['longitude'] == $_GET['longitude'] && $lok['latitude'] == $_GET['latitude']) {
                                 echo "Silahkan Scan QR Code untuk melakukan Absen <br><br>";
-                                echo '<img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=200x200" alt="" title="Scan QR Code!" />';
+                                $url = $_SERVER['HTTP_HOST'].'/page/konfir-absen.php?key='.$lok['key'];
+                                echo '<img src="https://api.qrserver.com/v1/create-qr-code/?size=size=200x200&data='.$url.'" alt="" title="Scan QR Code!" />';
                             } else {
                                 echo '<script type="text/javascript">', 'errorRedirectMessage("Pastikan lokasi Anda berada di Toko. Tunggu Beberapa Saat atau Klik Tombol OK.", document.location.origin + "/daraweb/page/absen-pegawai.php");', '</script>';
                             }
