@@ -7,7 +7,7 @@
     include_once('../component/functions.php');
     $db = dbConnect();
     ?>
-    <div class="table" id="table">
+    <div class="table-z" id="table">
         <!-- table -->
         <table id="tabelPegawai" class="display" style="width:100%">
             <thead>
