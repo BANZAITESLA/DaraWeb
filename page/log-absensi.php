@@ -43,9 +43,9 @@
                             $tgl = substr($_GET['filter_tanggal'], 8, 2);
                             $bln = substr($_GET['filter_tanggal'], 5, 2);
                             $thn = substr($_GET['filter_tanggal'], 0, 4);
-                            $sql = "SELECT log_absen.waktu_absen, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE DAY(waktu_absen) = '$tgl' AND MONTH(waktu_absen) = '$bln' AND YEAR(waktu_absen) = '$thn';";
+                            $sql = "SELECT log_absen.waktu_absen, pegawai.nama, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE DAY(waktu_absen) = '$tgl' AND MONTH(waktu_absen) = '$bln' AND YEAR(waktu_absen) = '$thn';";
                         } else {
-                            $sql = "SELECT log_absen.waktu_absen, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE DATE_FORMAT(log_absen.waktu_absen, '%Y-%m-%d') = '$tgl';";
+                            $sql = "SELECT log_absen.waktu_absen, pegawai.nama, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE DATE_FORMAT(log_absen.waktu_absen, '%Y-%m-%d') = '$tgl';";
                         }
                         $res = $db->query($sql);
                         if ($res) {
