@@ -45,8 +45,12 @@
                 <div class="item-control-mp">
                     <label for="bulan">Jumlah kehadiran penuh :
                         <?php
-                        $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
-                        $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                        if (isset($_GET['filter_tanggal']) && $_GET['filter_tanggal'] != '') {
+                            $bln = substr($_GET['filter_tanggal'], 5, 2);
+                            $thn = substr($_GET['filter_tanggal'], 0, 4);
+                        }
+                        $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$bln';");
+                        $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$bln';");
                         if ($res6) {
                             if ($res6->num_rows > 0) {
                                 $data6 = $res6->fetch_assoc();
@@ -84,50 +88,46 @@
                 <tbody>
                     <?php
                     if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                        $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
-                        $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
-                        if ($res6) {
-                            if ($res6->num_rows > 0) {
-                                $data6 = $res6->fetch_assoc();
-                                if ($res7) {
-                                    $data7 = $res7->fetch_all(MYSQLI_ASSOC);
-                                    $x = 0;
-                                    foreach ($data7 as $barisdata) {
-                                        $startTimeStamp = strtotime($barisdata['tgl_awal_libur']);
-                                        $endTimeStamp = strtotime($barisdata['tgl_akhir_libur']);
-                                        $timeDiff = abs($endTimeStamp - $startTimeStamp);
-                                        $numberDays = $timeDiff / 86400;
-                                        $numberDays = intval($numberDays);
-                                        $x = $x + $numberDays;
-                                    }
-                                    $total = $sum - $x;
-                                }
-                            }
-                        }
-
                         $sql = "SELECT * FROM pegawai WHERE status_aktif = 'Aktif';";
                         $res = $db->query($sql);
                         $data = $res->fetch_all(MYSQLI_ASSOC);
-
-                        $bln = '01';
-                        $thn = '2022';
                         foreach ($data as $pegawai) {
-                            $kehadiran = "SELECT COUNT(id_pegawai) FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Hadir' OR report_event.status = 'Terlambat' AND MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn';";
-                            $hdr = $db->query($kehadiran)->fetch_assoc();
-                            $persentase_kehadiran =((int)$hdr['COUNT(id_pegawai)'] / $total) * 100;
-                        
-                            $pelanggaran = "SELECT COUNT(id_pegawai) FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Tanpa Keterangan' OR report_event.status = 'Terlambat' AND MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn';";
-                            $plg = $db->query($pelanggaran)->fetch_assoc();
-                            $persentase_pelanggaran =((int)$plg['COUNT(id_pegawai)'] / $total) * 100;
-                        
-                            $izin = "SELECT COUNT(id_pegawai) FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Izin' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
-                            $iz = $db->query($izin)->fetch_assoc();
-                            $persentase_izin =((int)$iz['COUNT(id_pegawai)'] / $total) * 100;
-                        
-                            $cuti = "SELECT COUNT(id_pegawai) FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Cuti' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
-                            $ct = $db->query($cuti)->fetch_assoc();
-                            $persentase_cuti =((int)$ct['COUNT(id_pegawai)'] / $total) * 100;
-                        ?>
+                            $queryKehadiran = "SELECT * FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Hadir' OR report_event.status = 'Terlambat') AND (MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn');";
+                            $resKehadiran = $db->query($queryKehadiran) or die($db->error);
+                            $dataKehadiran = $resKehadiran->fetch_all(MYSQLI_ASSOC);
+                            $kehadiran = 0;
+                            foreach ($dataKehadiran as $data) {
+                                $kehadiran++;
+                            }
+                            $persentase_kehadiran = round(($kehadiran / $total) * 100, 2) . ' % (' . $kehadiran . ' dari ' . $total . ')';
+
+                            $queryPelanggaran = "SELECT * FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Tanpa Keterangan' OR report_event.status = 'Terlambat') AND (MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn');";
+                            $resPelanggaran = $db->query($queryPelanggaran) or die($db->error);
+                            $dataPelanggaran = $resPelanggaran->fetch_all(MYSQLI_ASSOC);
+                            $pelanggaran = 0;
+                            foreach ($dataPelanggaran as $data) {
+                                $pelanggaran++;
+                            }
+                            $persentase_pelanggaran = round(($pelanggaran / $total) * 100, 2) . ' % (' . $pelanggaran . ' dari ' . $total . ')';
+
+                            $queryIzin = "SELECT * FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Izin' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
+                            $resIzin = $db->query($queryIzin) or die($db->error);
+                            $dataIzin = $resIzin->fetch_all(MYSQLI_ASSOC);
+                            $izin = 0;
+                            foreach ($dataIzin as $data) {
+                                $izin++;
+                            }
+                            $persentase_izin = round(($izin / $total) * 100, 2) . ' % (' . $izin . ' dari ' . $total . ')';
+
+                            $queryCuti = "SELECT * FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Cuti' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
+                            $resCuti = $db->query($queryCuti) or die($db->error);
+                            $dataCuti = $resCuti->fetch_all(MYSQLI_ASSOC);
+                            $cuti = 0;
+                            foreach ($dataCuti as $data) {
+                                $cuti++;
+                            }
+                            $persentase_cuti = round(($cuti / $total) * 100, 2) . ' % (' . $cuti . ' dari ' . $total . ')';
+                    ?>
                             <tr>
                                 <td></td>
                                 <td><?php echo $pegawai['nama']; ?></td>
@@ -137,7 +137,7 @@
                                 <td><?php echo $persentase_cuti; ?></td>
                                 <td></td>
                             </tr>
-                        <?php
+                    <?php
                         }
                     } else {
                     }
