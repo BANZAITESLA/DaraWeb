@@ -10,157 +10,139 @@
 
 <body>
     <?php include_once('../component/functions.php') ?>
-    <?php 
-        menu_owner();    
-        $db = dbConnect();
-        $d=strtotime("today");
-        $tgl = date("Y-m-d", $d);
-        $day = date("l", $d);
-        $sum = date("t", $d);
-        $month = date("m", $d);
-        if ($day == 'Monday') {
-            $day = 'Senin';
-        } else if ($day == 'Tuesday') {
-            $day = 'Selasa';
-        } else if ($day == 'Wednesday') {
-            $day = 'Rabu';
-        } else if ($day == 'Thursday') {
-            $day = 'Kamis';
-        } else if ($day == 'Friday') {
-            $day = 'Jumat';
-        } else if ($day == 'Saturday') {
-            $day = 'Sabtu';
-        } else {
-            $day = 'Minggu';
-        }
+    <?php
+    menu_owner();
+    $db = dbConnect();
+    $d = strtotime("today");
+    $tgl = date("Y-m-d", $d);
+    $day = date("l", $d);
+    $sum = date("t", $d);
+    $month = date("m", $d);
+    if ($day == 'Monday') {
+        $day = 'Senin';
+    } else if ($day == 'Tuesday') {
+        $day = 'Selasa';
+    } else if ($day == 'Wednesday') {
+        $day = 'Rabu';
+    } else if ($day == 'Thursday') {
+        $day = 'Kamis';
+    } else if ($day == 'Friday') {
+        $day = 'Jumat';
+    } else if ($day == 'Saturday') {
+        $day = 'Sabtu';
+    } else {
+        $day = 'Minggu';
+    }
     ?>
     <div class="container-all">
         <div class="head-info">Laporan Absensi</div>
         <div class="container-form-c">
             <div class="head-box-item" style="margin: 20px;">
-                    <div class="item-control-mp">
-                        <label for="bulan">Bulan</label>
-                        <input type="month" id="month_year" name="month_year"/>
-                    </div>
-                    <div class="item-control-mp">
-                        <label for="bulan">Jumlah kehadiran penuh : 
-                            <?php 
-                                $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
-                                $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
-                                if($res6){
-                                    if($res6->num_rows>0){
-                                        $data6=$res6->fetch_assoc();
-                                        if ($res7) {
-                                            $data7 = $res7->fetch_all(MYSQLI_ASSOC);
-                                            $x = 0;
-                                            foreach ($data7 as $barisdata) {
-                                                $startTimeStamp = strtotime($barisdata['tgl_awal_libur']);
-                                                $endTimeStamp = strtotime($barisdata['tgl_akhir_libur']);
-                                                $timeDiff = abs($endTimeStamp - $startTimeStamp);
-                                                $numberDays = $timeDiff/86400;
-                                                $numberDays = intval($numberDays);
-                                                $x = $x + $numberDays;
-                                            }
-                                            $total = $sum - $x;
-                                            echo $total;
-                                        }
-                                    }
-                                }
-                            ?> hari</label>
-                    </div>
+                <div class="item-control-mp">
+                    <label for="bulan">Bulan</label>
+                    <input type="month" id="month_year" name="month_year" />
                 </div>
-                <table id="tabelJabatan" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No Urut</th>
-                    <th>Nama Pegawai</th>
-                    <th>Kehadiran</th>
-                    <th>Pelanggaran</th>
-                    <th>Izin</th>
-                    <th>Cuti</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    if ($db->connect_errno == 0) { /* ketika koneksi db success */
-                        // if (isset($_GET['filter_tanggal']) && $_GET['filter_tanggal'] != '') {
-                        //     $bln = substr($_GET['filter_tanggal'], 5, 2);
-                        //     $thn = substr($_GET['filter_tanggal'], 0, 4);
-                        //     $sql = "SELECT log_absen.waktu_absen, pegawai.nama, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE DAY(waktu_absen) = '$tgl' AND MONTH(waktu_absen) = '$bln' AND YEAR(waktu_absen) = '$thn';";
-                        // } else {
-                        //     $sql = "SELECT log_absen.waktu_absen, pegawai.nama, report_event.status FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE DATE_FORMAT(log_absen.waktu_absen, '%Y-%m-%d') = '$tgl';";
-                        // }
-                    ?>
-                        <tr>
+                <div class="item-control-mp">
+                    <label for="bulan">Jumlah kehadiran penuh :
                         <?php
-                            $nama = "SELECT nama FROM pegawai WHERE status_aktif = 'Aktif' ORDER BY id_pegawai;";
-                            $res_nama = $db->query($nama);
-                            $data_nama = $res_nama->fetch_all(MYSQLI_ASSOC);
-                            foreach ($data_nama as $datanama) {
-                            
-                    ?>
-                                <td align="center"></td>
-                                <td><?php echo $datanama['nama']; ?></td>
-                    <?php
+                        $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                        $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                        if ($res6) {
+                            if ($res6->num_rows > 0) {
+                                $data6 = $res6->fetch_assoc();
+                                if ($res7) {
+                                    $data7 = $res7->fetch_all(MYSQLI_ASSOC);
+                                    $x = 0;
+                                    foreach ($data7 as $barisdata) {
+                                        $startTimeStamp = strtotime($barisdata['tgl_awal_libur']);
+                                        $endTimeStamp = strtotime($barisdata['tgl_akhir_libur']);
+                                        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+                                        $numberDays = $timeDiff / 86400;
+                                        $numberDays = intval($numberDays);
+                                        $x = $x + $numberDays;
+                                    }
+                                    $total = $sum - $x;
+                                    echo $total;
+                                }
                             }
-                            $hadir = "SELECT COUNT(report_event.id_report) FROM report_event JOIN log_absen ON report_event.id_report = log_absen.id_absen JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE MONTH(waktu_absen) = '$month' AND (`status` = 'Hadir' OR `status` = 'Terlambat') AND pegawai.status_aktif = 'Aktif' ORDER BY pegawai.id_pegawai;";
-                            $res_hadir = $db->query($hadir);
-                            $data_hadir = $res_hadir->fetch_all(MYSQLI_ASSOC);
-                            foreach ($data_hadir as $datahadir) {
-                    ?>
-                                <td><?php echo $datahadir["COUNT(report_event.id_report)"]; ?></td>
-                    <?php
-                            } 
-                            
-                            
-                            $langgar = "SELECT * FROM report_event JOIN log_absen ON report_event.id_report = log_absen.id_absen JOIN pegawai ON pegawai.id_pegawai = log_absen.id_pegawai WHERE MONTH(waktu_absen) = '01' AND `status` = 'Terlambat' ORDER BY pegawai.id_pegawai ORDER BY pegawai.id_pegawai;";
-                    $izin = "SELECT * FROM report_event JOIN izin_cuti ON report_event.id_report = izin_cuti.id_report JOIN pegawai ON pegawai.id_pegawai = izin_cuti.id_pegawai WHERE MONTH(tanggal_awal_izin) = '01' and report_event.status = 'Izin' and izin_cuti.verifikasi = 'Diizinkan' ORDER BY pegawai.id_pegawai;";
-                    $cuti = "SELECT * FROM report_event JOIN izin_cuti ON report_event.id_report = izin_cuti.id_report JOIN pegawai ON pegawai.id_pegawai = izin_cuti.id_pegawai WHERE MONTH(tanggal_awal_izin) = '01' and  OR report_event.status = 'Cuti' and izin_cuti.verifikasi = 'Diizinkan' ORDER BY pegawai.id_pegawai;";
-                    $res = $db->query($sql);
-                    if ($res) {
-                        $data = $res->fetch_all(MYSQLI_ASSOC);
-                        $i = 1;
-                        foreach ($data as $barisdata) { /* looping untuk menampilkan hasil query */
-                ?>
-
-                                <td>
-                                    <?php
-                                        if ($barisdata["status"] == 'Terlambat') {
-                                            if ($res_jam) {
-                                                $data_jam = $res_jam->fetch_assoc();
-                                                // $time = [$data_jam['jam_buka'], $data_jam['toleransi']];
-                                                // $sum = strtotime('00:00:00');
-                                                // $totaltime = 0;
-                                                // foreach( $time as $element ) {
-     
-                                                //     // Converting the time into seconds
-                                                //     $timeinsec = strtotime($element) - $sum;
-                                                     
-                                                //     // Sum the time with previous value
-                                                //     $totaltime = $totaltime + $timeinsec;
-                                                // }
-                                                // $h = intval($totaltime / 3600);                                       
-                                                // $totaltime = $totaltime - ($h * 3600);
-                                                // $m = intval($totaltime / 60);
-                                                // $s = $totaltime - ($m * 60);
-                                                
-                                                //Printing the result
-                                                echo $barisdata['status'] . "";
-                                            }
-                                        } else {
-                                            echo $barisdata["status"];
-                                        }
-                                    ?>
-                                </td>
-                            </tr>
-                <?php
                         }
+                        ?> hari</label>
+                </div>
+            </div>
+            <table id="tabelJabatan" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No Urut</th>
+                        <th>Nama Pegawai</th>
+                        <th>Kehadiran</th>
+                        <th>Pelanggaran</th>
+                        <th>Izin</th>
+                        <th>Cuti</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($db->connect_errno == 0) { /* ketika koneksi db success */
+                        $res6 = $db->query("SELECT COUNT(id_tgl) FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                        $res7 = $db->query("SELECT * FROM `tanggal_libur` WHERE MONTH(tgl_awal_libur) = '$month';");
+                        if ($res6) {
+                            if ($res6->num_rows > 0) {
+                                $data6 = $res6->fetch_assoc();
+                                if ($res7) {
+                                    $data7 = $res7->fetch_all(MYSQLI_ASSOC);
+                                    $x = 0;
+                                    foreach ($data7 as $barisdata) {
+                                        $startTimeStamp = strtotime($barisdata['tgl_awal_libur']);
+                                        $endTimeStamp = strtotime($barisdata['tgl_akhir_libur']);
+                                        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+                                        $numberDays = $timeDiff / 86400;
+                                        $numberDays = intval($numberDays);
+                                        $x = $x + $numberDays;
+                                    }
+                                    $total = $sum - $x;
+                                }
+                            }
+                        }
+
+                        $sql = "SELECT * FROM pegawai WHERE status_aktif = 'Aktif';";
+                        $res = $db->query($sql);
+                        $data = $res->fetch_all(MYSQLI_ASSOC);
+
+                        $bln = '01';
+                        $thn = '2022';
+                        foreach ($data as $pegawai) {
+                            $kehadiran = "SELECT COUNT(id_pegawai) FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Hadir' OR report_event.status = 'Terlambat' AND MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn';";
+                            $hdr = $db->query($kehadiran)->fetch_assoc();
+                            $persentase_kehadiran =((int)$hdr['COUNT(id_pegawai)'] / $total) * 100;
+                        
+                            $pelanggaran = "SELECT COUNT(id_pegawai) FROM log_absen JOIN report_event ON log_absen.id_report = report_event.id_report WHERE log_absen.id_pegawai = '$pegawai[id_pegawai]' AND (report_event.status = 'Tanpa Keterangan' OR report_event.status = 'Terlambat' AND MONTH(log_absen.waktu_absen) = '$bln' AND YEAR(log_absen.waktu_absen) = '$thn';";
+                            $plg = $db->query($pelanggaran)->fetch_assoc();
+                            $persentase_pelanggaran =((int)$plg['COUNT(id_pegawai)'] / $total) * 100;
+                        
+                            $izin = "SELECT COUNT(id_pegawai) FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Izin' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
+                            $iz = $db->query($izin)->fetch_assoc();
+                            $persentase_izin =((int)$iz['COUNT(id_pegawai)'] / $total) * 100;
+                        
+                            $cuti = "SELECT COUNT(id_pegawai) FROM izin_cuti JOIN report_event ON izin_cuti.id_report = report_event.id_report WHERE izin_cuti.id_pegawai = '$pegawai[id_pegawai]' AND report_event.status = 'Cuti' AND MONTH(izin_cuti.tanggal_awal_izin) = '$bln' AND YEAR(izin_cuti.tanggal_awal_izin) = '$thn' AND izin_cuti.verifikasi = 'Diizinkan';";
+                            $ct = $db->query($cuti)->fetch_assoc();
+                            $persentase_cuti =((int)$ct['COUNT(id_pegawai)'] / $total) * 100;
+                        ?>
+                            <tr>
+                                <td></td>
+                                <td><?php echo $pegawai['nama']; ?></td>
+                                <td><?php echo $persentase_kehadiran; ?></td>
+                                <td><?php echo $persentase_pelanggaran; ?></td>
+                                <td><?php echo $persentase_izin; ?></td>
+                                <td><?php echo $persentase_cuti; ?></td>
+                                <td></td>
+                            </tr>
+                        <?php
+                        }
+                    } else {
                     }
-                } else {
-                }
-                ?>
-        </table>
+                    ?>
+            </table>
         </div>
     </div>
     <script>
@@ -172,10 +154,9 @@
                 "url": document.location.origin + "/daraweb/assets/id.json",
             },
             "columnDefs": [{
-                    "targets": 0,
-                    "orderable": false
-                }
-            ]
+                "targets": 0,
+                "orderable": false
+            }]
         });
 
         //nie buat no urut otomatis
