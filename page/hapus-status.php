@@ -1,13 +1,12 @@
-<?php include_once('../component/script.php') ?>
-<?php include_once('../component/functions.php') ?>
 <?php
+include_once('../component/functions.php');
 $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_errno == 0) {
         if(isset($_GET['id_status'])) {
             try {
                 $id = $_GET["id_status"];
-                $cek = "SELECT id_status_p FROM pegawai WHERE id_status_p = '$id';";
+                $cek = "SELECT id_status_p FROM pegawai WHERE id_status_p = '$id' AND status_aktif = 'Aktif';";
                 $res1 = $db->query($cek);
                     if ($res1) {
                         if ($res1->num_rows == 1) {

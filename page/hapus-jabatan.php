@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_GET['id_jabatan'])) {
             try {
                 $id = $_GET["id_jabatan"];
-                $cek = "SELECT id_jabatan FROM pegawai WHERE id_jabatan = '$id';";
+                $cek = "SELECT id_jabatan FROM pegawai WHERE id_jabatan = '$id' AND status_aktif = 'Aktif';";
                 $res1 = $db->query($cek);
 
                 if ($res1) {

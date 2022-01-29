@@ -45,9 +45,11 @@
                 //ni yg dibawah nie biar return datanya type datanya json biar bisa pake titik dibawah response.namavariablenya
                 dataType: 'json',
                 success: function(response) { //! ni gk tau gimnaaaaaa
+                    console.log(response);
                     successRedirectMessage(response.message, dest); 
                 },
                 error: function(response) {
+                    console.log(response);
                     errorMessage(response.message);
                 }
             });

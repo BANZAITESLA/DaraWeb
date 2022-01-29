@@ -98,11 +98,12 @@
                             /* ajax hapus sesuai id menu */
                             type: 'POST',
                             url: urlHapusStatus,
+                            dataType: 'json',
                             success: function(response) {
                                 if (response.status == 'error') {
                                     errorMessage(response.message);
                                 } else {
-                                    successRedirectMessage("Data berhasil dihapus", urlReload);
+                                    successRedirectMessage(response.message, urlReload);
                                 }
                             },
                             error: function(response) {
