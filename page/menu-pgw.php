@@ -16,7 +16,7 @@ function menu_pgw()
                 <a href="hari-libur.php" accesskey="b"><i class="far fa-calendar-minus"></i>Hari Libur</a>
                 <a href="ajuan-pegawai.php" accesskey="b"><i class="fas fa-plane"></i>Pengajuan Izin & Cuti</a>
                 <a href="log-absensi-pegawai.php" accesskey="b"><i class="fas fa-list"></i>Log Absensi</a>
-                <a href="#" accesskey="b"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
+                <a href="laporan-absensi-pegawai.php?filter_tanggal=<?php echo date('Y').'-'.date('m'); ?>" accesskey="p"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>                
                 <hr>
                 <a href="logout.php" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
                 </div>
