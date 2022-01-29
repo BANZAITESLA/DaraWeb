@@ -3,17 +3,14 @@ session_start();
 include_once('../component/functions.php');
 $db = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $key = $_GET["key"];
-    $cek = "SELECT * FROM lokasi WHERE 'key' = " . $key . ";";
-    $res1 = $db->query($cek);
-    echo $res1;
     try {
         //code...if ($db->connect_errno == 0) {
         if (isset($_GET['key'])) {
-
-
+            $key = $_GET["key"];
+            $cek = "SELECT * FROM lokasi WHERE 'key' = '$key';";
+            $res1 = $db->query($cek);
             if ($res1) {
-                if ($res1->num_rows == 1) {
+                if ($res1->num_rows < 1) {
                     date_default_timezone_set('Asia/Jakarta'); // CDT
                     $current_time = date('H:i:s');
                     $current_date = date('Y-m-d');
@@ -22,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     $end = substr(str_replace("-", "", $current_date), 2);
                     $id_re = $start . '' . $end . $_SESSION['id_pegawai'] . '03';
                     $periode = substr(str_replace("-", "", $current_date), 2, 2);
-
-                    $day = date("l", $current_date);
-
+                    
+                    $day = date("l", strtotime($current_date));
+                    
                     if ($day == 'Monday') {
                         $day = 'Senin';
                     } else if ($day == 'Tuesday') {
@@ -67,18 +64,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         } else {
                             $status = 'Hadir';
                         }
-                    }
 
-                    $insert_re = "INSERT INTO `report_event` (`id_report`,`status`, `periode`) VALUES ('$id_re','', '$periode');";
+                    }
+                    
+                    // echo $id_re;
+                    $insert_re = "INSERT INTO `report_event` (`id_report`,`status`, `periode`) VALUES ('$id_re','$status', '$periode');";
                     $insert_li = "INSERT INTO log_absen (id_pegawai, waktu_absen, id_report) VALUES ('$_SESSION[id_pegawai]', '$waktu', $id_re)";
-                    $res1 = $db->query($insert_re);
-                    $res2 = $db->query($insert_li);
+                    $res1 = $db->query($insert_re) or die($db->error);
+                    $res2 = $db->query($insert_li) or die($db->error);
 
                     if ($res1 && $res2) {
                         redirect('beranda-pegawai.php');
                     }
-                } else {
-                    echo "gagal";
                 }
             }
             //ini return response tadi
