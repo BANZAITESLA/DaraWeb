@@ -101,8 +101,13 @@
                             /* ajax hapus sesuai id menu */
                             type: 'POST',
                             url: urlHapusJabatan,
+                            dataType: 'json',
                             success: function(response) {
-                                successRedirectMessage("Data berhasil dihapus", urlReload);
+                                if (response.status == 'success') {
+                                    successRedirectMessage(response.message, urlReload);
+                                } else {
+                                    errorMessage(response.message);
+                                }
                             },
                             error: function(response) {
                                 errorMessage(response.message);
