@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php include_once("../page/menu-owner.php"); ?>
+    <?php include_once("../page/menu-pgw.php"); ?>
     <?php include_once('../component/header.php') ?>
     <title>Detail Absensi</title>
     <?php include_once('../component/script.php') ?>
@@ -11,7 +11,7 @@
 <body>
     <?php include_once('../component/functions.php') ?>
     <?php
-    menu_owner();
+    menu_pgw();
     $db = dbConnect();
     $d = strtotime("today");
     $tgl = date("Y-m-d", $d);
