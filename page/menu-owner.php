@@ -21,7 +21,7 @@ function menu_owner()
                 <a href="atur-absensi.php" accesskey="n"><i class="fas fa-cog"></i>Pengaturan Absensi</a>
                 <a href="ajuan-izin-cuti.php" accesskey="i"><i class="fas fa-suitcase"></i>Ajuan Izin dan Cuti</a>
                 <a href="log-absensi.php" accesskey="l"><i class="fas fa-list"></i>Log Absensi</a>
-                <a href="laporan-absensi.php" accesskey="p"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
+                <a href="laporan-absensi.php?filter_tanggal=<?php echo date('Y').'-'.date('m'); ?>" accesskey="p"><i class="fas fa-file-invoice"></i>Laporan Absensi</a>
                 <hr>
                 <a href="logout.php" accesskey="l" id="logout"><i class="fas fa-sign-out-alt"></i>Keluar</a>
             </div>
