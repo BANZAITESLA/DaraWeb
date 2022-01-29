@@ -4,7 +4,7 @@
 <head>
     <?php include_once("../page/menu-owner.php"); ?>
     <?php include_once('../component/header.php') ?>
-    <title>Laporan Absensi</title>
+    <title>Detail Absensi</title>
     <?php include_once('../component/script.php') ?>
 </head>
 
@@ -35,14 +35,38 @@
     }
     ?>
     <div class="container-all">
-        <div class="head-info">Laporan Absensi</div>
+        <div class="head-info">Detail Laporan Absensi</div>
         <div class="container-form-c">
+            <?php
+            $id = $db->escape_string($_GET['id_pegawai']);
+            $res = $db->query("SELECT * FROM pegawai JOIN jabatan ON pegawai.id_jabatan = jabatan.id_jabatan JOIN status_pegawai ON pegawai.id_status_p = status_pegawai.id_status_p WHERE id_pegawai = '$id';");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+    ?>
+                        <div class="grid-container">
+                            <div class="grid-item">ID Pegawai</div>
+                            <div class="grid-item"><?php echo ': ' . $data["id_pegawai"]; ?></div>
+                            <div class="grid-item"></div>  
+                            <div class="grid-item">Jabatan</div>
+                            <div class="grid-item"><?php echo ': ' . $data["nama_jabatan"]; ?></div>
+                            <div class="grid-item">Nama Pegawai</div>
+                            <div class="grid-item"><?php echo ': ' . $data["id_pegawai"]; ?></div>
+                            <div class="grid-item"></div>  
+                            <div class="grid-item">Status Pegawai</div>
+                            <div class="grid-item"><?php echo ': ' . $data["nama_status_p"]; ?></div>
+                        </div>
+    <?php
+
+                } else {
+                    echo '<script type="text/javascript">', 'errorRedirectMessage("Data tidak ditemukan", "atur-jabatan.php");', '</script>';
+                }
+            }
+            ?>
             <div class="head-box-item" style="margin: 20px;">
+                Bulan <?php echo $_GET['filter_tanggal'];?>
                 <div class="item-control-mp">
-                    <label for="bulan">Bulan</label>
-                    <input type="month" id="month_year" name="month_year" />
-                </div>
-                <div class="item-control-mp">
+                    
                     <label for="bulan">Jumlah kehadiran penuh :
                         <?php
                         if (isset($_GET['filter_tanggal']) && $_GET['filter_tanggal'] != '') {
@@ -77,13 +101,10 @@
             <table id="tabelJabatan" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No Urut</th>
-                        <th>Nama Pegawai</th>
                         <th>Kehadiran</th>
                         <th>Pelanggaran</th>
                         <th>Izin</th>
                         <th>Cuti</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,7 +158,7 @@
                                 <td><?php echo $persentase_izin; ?></td>
                                 <td><?php echo $persentase_cuti; ?></td>
                                 <td align="center">
-                                <a href="detail-absensi.php?id_pegawai=<?php echo $pegawai["id_pegawai"] . '&filter_tanggal=' . $_GET['filter_tanggal'] ;?>" ><button title="Detail"><i class="fas fa-info"></i></button></a>
+                                <a href="detail-absensi.php?id_pegawai=<?php echo $pegawai["id_pegawai"]; ?>" ><button title="Detail"><i class="fas fa-info"></i></button></a>
                                 </td>
                             </tr>
                     <?php

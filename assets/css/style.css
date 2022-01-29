@@ -759,7 +759,7 @@ hr {
 /* table */
 
 .table {
-    margin: 0 10px 10px 10px;
+    margin: 0 20px 20px 20px;
 }
 
 .table-z {
@@ -844,3 +844,15 @@ input:read-only {
 textarea:read-only {
     border-color: #757575;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    width: 100%;
+    padding: 20px;
+  }
+  .grid-item {
+    font-size: 16px;
+    text-align: left;
+    padding: 5px 0px;
+  }
